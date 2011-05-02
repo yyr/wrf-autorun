@@ -14,22 +14,28 @@ use strict;
 use warnings;
 
 sub compile_ifort {
-  `ifort $_[0] -L/usr/local/netcdf/lib -lnetcdf -lm -I/usr/local/netcdf/include/ -free -o $_[0].o` == 0 and print "...successfully compiled $_[0]"
+  `ifort $_[0] -L/usr/local/netcdf/lib -lnetcdf -lm -I/usr/local/netcdf/include/ -free -o $_[0].o` eq 0 and print "...successfully compiled $_[0]"
 
 }
 
-sub run_compiled_ones {         # edit for each variable
+sub run_read_wrf_nc_f {         # edit for each variable
   my ($prog_l,$files_l,$vars_l)=@_;
-	`./$x.o -EditData $z $y`;
+  for my $i (0 .. @$files_l) {
+      foreach my $vars (@$vars_l,) {
+	print "./@$prog_l[$i].o -EditData $vars @$files_l[$i] \n";
+	`./@$prog_l[$i].o -EditData $vars @$files_l[$i] <<EOF; yes
+EOF`;
+      }
+  }
 }
 
-sub remove_height { 		# 
+sub remove_height {             #
   my ( $prog, $files, $vars) = @_;
   foreach (@$prog) {
     print "compiling: $_ \n ";
-    compile_ifort($_);
+    # compile_ifort($_);
   }
-  run_compiled_ones(\@$prog,\@$files,\@$vars);
+  run_read_wrf_nc_f(\@$prog,\@$files,\@$vars); # array ref
 }
 
 
