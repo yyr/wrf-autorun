@@ -9,17 +9,22 @@
 
 # Description: 
 # brain dead program
-./read_wrf_nc_1.f.o -EditData HGT_M geo_em.d01.nc
-./read_wrf_nc_1.f.o -EditData HGT_U geo_em.d01.nc
-./read_wrf_nc_1.f.o -EditData HGT_V geo_em.d01.nc
+# put yes in a heredocument
+echo "yes" > yes
 
-./read_wrf_nc_2.f.o -EditData HGT_M geo_em.d02.nc
-./read_wrf_nc_2.f.o -EditData HGT_U geo_em.d02.nc
-./read_wrf_nc_2.f.o -EditData HGT_V geo_em.d02.nc
+# 
+./read_wrf_nc_1.f.o -EditData HGT_M geo_em.d01.nc  < yes
+./read_wrf_nc_1.f.o -EditData HGT_U geo_em.d01.nc < yes
+./read_wrf_nc_1.f.o -EditData HGT_V geo_em.d01.nc < yes
 
-./read_wrf_nc_3.f.o -EditData HGT_M geo_em.d03.nc
-./read_wrf_nc_3.f.o -EditData HGT_U geo_em.d03.nc
-./read_wrf_nc_3.f.o -EditData HGT_V geo_em.d03.nc
+./read_wrf_nc_2.f.o -EditData HGT_M geo_em.d02.nc < yes
+./read_wrf_nc_2.f.o -EditData HGT_U geo_em.d02.nc < yes
+./read_wrf_nc_2.f.o -EditData HGT_V geo_em.d02.nc < yes
 
+./read_wrf_nc_3.f.o -EditData HGT_M geo_em.d03.nc < yes
+./read_wrf_nc_3.f.o -EditData HGT_U geo_em.d03.nc < yes
+./read_wrf_nc_3.f.o -EditData HGT_V geo_em.d03.nc < yes
+
+rm -f yes
 
 # height_remove.sh ends here

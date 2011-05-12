@@ -47,7 +47,7 @@ echo '' >> wrf.sh
 echo "cd $wrf_run_dir" >> wrf.sh
 echo '' >> wrf.sh
 
-echo "No of Cpus: $cps" >> wrf.sh
+echo "# No of Cpus: $cps" >> wrf.sh
 echo "mpirun -np $cpus dplace -s1 ./wrf.exe " >> wrf.sh
 
 # qsub wrf.sh
