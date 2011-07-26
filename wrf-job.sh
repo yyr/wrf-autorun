@@ -24,12 +24,14 @@ then
 fi
 
 # make sure env file is there
-if [ ! DirNames.env ]; then
+if [ ! DirNames.sh ]; then
     echo "No ENV file"
     exit 24
 else
-    . DirNames.env
+    . DirNames.sh
 fi
+
+echo wrf.exe dir is: $wrf_run_dir
 
 # put some default cpus
 cpus=$1
@@ -40,7 +42,7 @@ echo '#!/bin/bash' > wrf.sh
 chmod +x wrf.sh
 echo "#PBS -q $job_type" >> wrf.sh
 echo '#PBS -l ncpus='$cpus >> wrf.sh
-echo "#PBS -N $run_name" >> wrf.sh
+echo "#PBS -N $Run_name" >> wrf.sh
 echo "#PBS -o log.wrf" >> wrf.sh
 echo '#PBS -j oe' >> wrf.sh
 echo '' >> wrf.sh
@@ -50,6 +52,7 @@ echo '' >> wrf.sh
 echo "# No of Cpus: $cps" >> wrf.sh
 echo "mpirun -np $cpus dplace -s1 ./wrf.exe " >> wrf.sh
 
+echo \"wrf.sh\" is Created
 # qsub wrf.sh
 
 # wrf-job.sh ends here

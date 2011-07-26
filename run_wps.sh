@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 # Copyright (C) Yagnesh Raghava Yakkala. www.yagnesh.org
 #    File: run_wps.sh
@@ -49,7 +49,7 @@ function check_error() {
 
 ########################################################################
 cd `pwd`                        # go to the working directory possibly WPS dir
-. DirNames.env			# few dir names IMP to edit
+. DirNames.sh                  # few dir names IMP to edit
 
 Error_Args=64
 Error_exe=128
@@ -78,6 +78,7 @@ case $Arg in
 # name list options
 # opt_output_from_geogrid_path=${opt_output_from_geogrid_path:`pwd`}
 #--------------
+        echo "opt_output_from_geogrid_path::---->" $opt_output_from_geogrid_path
         if [ `ls $opt_output_from_geogrid_path/geo_* | wc -l` == 0 ]; then
             change-option.pl $namelist opt_output_from_geogrid_path \'$opt_output_from_geogrid_path\' &&
             run_geogrid

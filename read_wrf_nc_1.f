@@ -1666,10 +1666,10 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
      data_real(81:122,66:103,1)=16.0
 
   elseif ( var == 'IVGTYP' ) then
-     data_int(81:122,66:103,1)=16.0
+     data_int(81:122,66:103,1)=16
 
   elseif ( var == 'ISLTYP' ) then
-     data_int(81:122,66:103,1)=14.0
+     data_int(81:122,66:103,1)=14
 
   elseif ( var == 'VEGFRA' ) then
      data_real(81:122,66:103,1)=0.0
@@ -1696,12 +1696,6 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
      open(100,file='sst.dat',status='old',FORM='unformatted')
      read(100) sst(81:122,66:103,1)
         data_real(81:122,66:103,1)=sst(81:122,66:103,1)
-     ! do j=66,103
-     !    do i=81,122
-     !       data_real(i,j,1)=SST(i,j,1)
-     !    enddo
-     ! enddo
-
 
   else
      print*,"Variable given was not one of above - so no change will be"

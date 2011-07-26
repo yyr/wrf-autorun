@@ -8,11 +8,11 @@
 #
 
 # Description: 
-if [ ! DirNames.env ]; then
+if [ ! DirNames.sh ]; then
     echo "No ENV file"
     echo "trying to contine..."
 else
-    . DirNames.env
+    . DirNames.sh
 fi
 
 ln -sf $met_files_dir/met_em* .

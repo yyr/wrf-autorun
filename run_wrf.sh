@@ -8,7 +8,7 @@ ulimit -s unlimited
 #PBS -o log.${Run_nam:-NoName}.$Date.wrf
 #PBS -j oe
 cd $1
-. DirNames.env
+. DirNames.sh
 
 echo $WRF_run_dir
 pwd

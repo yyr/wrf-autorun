@@ -1636,11 +1636,11 @@ END MODULE map_utils
      !     YAGNESH
      !     Remove Topography over hokkaido
   elseif ( var == 'HGT_U') then !
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
   elseif ( var == 'HGT_V') then !
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
   elseif ( var == 'HGT_M') then !
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
 
      !     land points to sea points
      ! LANDMASK =0
@@ -1656,45 +1656,45 @@ END MODULE map_utils
      ! SNOALB   =0.08
      ! TMN      =SST
   elseif ( var == 'LANDMASK' ) then
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
 
   elseif ( var == 'XLAND' ) then
-     data_real(60:201,180:250,1)=2.0
+     data_real(1:310,1:178,1)=2.0
 
   elseif ( var == 'LU_INDEX' ) then
-     data_real(60:201,180:250,1)=16.0
+     data_real(1:310,1:178,1)=16.0
 
   elseif ( var == 'IVGTYP' ) then
-     data_int(60:201,180:250,1)=16.0
+     data_int(1:310,1:178,1)=16
 
   elseif ( var == 'ISLTYP' ) then
-     data_int(60:201,180:250,1)=14.0
+     data_int(1:310,1:178,1)=14
 
   elseif ( var == 'VEGFRA' ) then
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
 
   elseif ( var == 'ALBBCK' ) then
-     data_real(60:201,180:250,1)=0.08
+     data_real(1:310,1:178,1)=0.08
 
   elseif ( var == 'SHDMAX' ) then
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
 
   elseif ( var == 'SHDMIN' ) then
-     data_real(60:201,180:250,1)=0.0
+     data_real(1:310,1:178,1)=0.0
 
   elseif ( var == 'SNOALB' ) then
-     data_real(60:201,180:250,1)=0.08
+     data_real(1:310,1:178,1)=0.08
 
   elseif ( var == 'SST' ) then
      open(99,file='sst.dat',status='unknown',FORM='unformatted')
-     write(99) data_real(60:201,180:250,1)
+     write(99) data_real(1:310,1:178,1)
      close(99)
 
   elseif ( var == 'TMN' ) then
-     ! allocate (sst(60:201,180:250,1))
+     ! allocate (sst(1:310,1:178,1))
      open(100,file='sst.dat',status='old',FORM='unformatted')
-     read(100) sst(60:201,180:250,1)
-     data_real(60:201,180:250,1)=sst(60:201,180:250,1)
+     read(100) sst(1:310,1:178,1)
+     data_real(1:310,1:178,1)=sst(1:310,1:178,1)
 
 
   else

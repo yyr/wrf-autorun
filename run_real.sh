@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. DirNames.env
+. DirNames.sh
 
 #PBS -q short
 #PBS -l ncpus=1
