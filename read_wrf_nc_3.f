@@ -1642,6 +1642,9 @@ END MODULE map_utils
   elseif ( var == 'HGT_M') then !
      data_real(1:310,1:178,1)=0.0
 
+  elseif ( var == 'HGT') then !
+     data_real(1:310,1:178,1)=0.0
+
      !     land points to sea points
      ! LANDMASK =0
      ! XLAND    =2

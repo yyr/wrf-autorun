@@ -1643,6 +1643,10 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
   elseif ( var == 'HGT_M') then !
      data_real(81:122,66:103,1)=0.0
 
+  elseif ( var == 'HGT') then !
+     data_real(81:122,66:103,1)=0.0
+
+
      !     land points to sea points
      ! LANDMASK =0
      ! XLAND    =2

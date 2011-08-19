@@ -29,17 +29,10 @@ function remove_height() {
             read_wrf_nc_3.f.o -EditData HGT_V geo_em.d03.nc < yes
             ;;
         wi )
-            read_wrf_nc_1.f.o -EditData HGT_M wrfinput_d01 < yes
-            read_wrf_nc_1.f.o -EditData HGT_U wrfinput_d01 < yes
-            read_wrf_nc_1.f.o -EditData HGT_V wrfinput_d01 < yes
+            read_wrf_nc_1.f.o -EditData HGT wrfinput_d01 < yes
+            read_wrf_nc_2.f.o -EditData HGT wrfinput_d02 < yes
+            read_wrf_nc_3.f.o -EditData HGT wrfinput_d03 < yes
 
-            read_wrf_nc_2.f.o -EditData HGT_M wrfinput_d02 < yes
-            read_wrf_nc_2.f.o -EditData HGT_U wrfinput_d02 < yes
-            read_wrf_nc_2.f.o -EditData HGT_V wrfinput_d02 < yes
-
-            read_wrf_nc_3.f.o -EditData HGT_M wrfinput_d03 < yes
-            read_wrf_nc_3.f.o -EditData HGT_U wrfinput_d03 < yes
-            read_wrf_nc_3.f.o -EditData HGT_V wrfinput_d03 < yes
             ;;
     esac
 }
