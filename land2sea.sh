@@ -12,25 +12,44 @@
 echo "yes" > yes
 
 function remove_height() {
-    ./read_wrf_nc_1.f.o -EditData HGT_M geo_em.d01.nc  < yes
-    ./read_wrf_nc_1.f.o -EditData HGT_U geo_em.d01.nc < yes
-    ./read_wrf_nc_1.f.o -EditData HGT_V geo_em.d01.nc < yes
+    echo "which files"
+    read datafile
+    case $datafile in
+        geo )
+            read_wrf_nc_1.f.o -EditData HGT_M geo_em.d01.nc  < yes
+            read_wrf_nc_1.f.o -EditData HGT_U geo_em.d01.nc < yes
+            read_wrf_nc_1.f.o -EditData HGT_V geo_em.d01.nc < yes
 
-    ./read_wrf_nc_2.f.o -EditData HGT_M geo_em.d02.nc < yes
-    ./read_wrf_nc_2.f.o -EditData HGT_U geo_em.d02.nc < yes
-    ./read_wrf_nc_2.f.o -EditData HGT_V geo_em.d02.nc < yes
+            read_wrf_nc_2.f.o -EditData HGT_M geo_em.d02.nc < yes
+            read_wrf_nc_2.f.o -EditData HGT_U geo_em.d02.nc < yes
+            read_wrf_nc_2.f.o -EditData HGT_V geo_em.d02.nc < yes
 
-    ./read_wrf_nc_3.f.o -EditData HGT_M geo_em.d03.nc < yes
-    ./read_wrf_nc_3.f.o -EditData HGT_U geo_em.d03.nc < yes
-    ./read_wrf_nc_3.f.o -EditData HGT_V geo_em.d03.nc < yes
+            read_wrf_nc_3.f.o -EditData HGT_M geo_em.d03.nc < yes
+            read_wrf_nc_3.f.o -EditData HGT_U geo_em.d03.nc < yes
+            read_wrf_nc_3.f.o -EditData HGT_V geo_em.d03.nc < yes
+            ;;
+        wi )
+            read_wrf_nc_1.f.o -EditData HGT_M wrfinput_d01 < yes
+            read_wrf_nc_1.f.o -EditData HGT_U wrfinput_d01 < yes
+            read_wrf_nc_1.f.o -EditData HGT_V wrfinput_d01 < yes
+
+            read_wrf_nc_2.f.o -EditData HGT_M wrfinput_d02 < yes
+            read_wrf_nc_2.f.o -EditData HGT_U wrfinput_d02 < yes
+            read_wrf_nc_2.f.o -EditData HGT_V wrfinput_d02 < yes
+
+            read_wrf_nc_3.f.o -EditData HGT_M wrfinput_d03 < yes
+            read_wrf_nc_3.f.o -EditData HGT_U wrfinput_d03 < yes
+            read_wrf_nc_3.f.o -EditData HGT_V wrfinput_d03 < yes
+            ;;
+    esac
 }
 
 function land2sea() {
     echo your input is:, $1
-    
+
     case $1 in
         d1|1|dom1 )
-	    echo "working on domain one"
+            echo "working on domain one"
             read_wrf_nc_1.f.o -EditData LANDMASK wrfinput_d01 < yes
             read_wrf_nc_1.f.o -EditData XLAND    wrfinput_d01 < yes
             read_wrf_nc_1.f.o -EditData LU_INDEX wrfinput_d01 < yes
@@ -46,7 +65,7 @@ function land2sea() {
             ;;
 
         d2|2|dom2 )
-	    echo "working on domain two"
+            echo "working on domain two"
             read_wrf_nc_2.f.o -EditData LANDMASK wrfinput_d02 < yes
             read_wrf_nc_2.f.o -EditData XLAND    wrfinput_d02 < yes
             read_wrf_nc_2.f.o -EditData LU_INDEX wrfinput_d02 < yes
@@ -62,7 +81,7 @@ function land2sea() {
             ;;
 
         d3|3|dom3 )
-	    echo "working on domain three"
+            echo "working on domain three"
             read_wrf_nc_3.f.o -EditData LANDMASK wrfinput_d03 < yes
             read_wrf_nc_3.f.o -EditData XLAND    wrfinput_d03 < yes
             read_wrf_nc_3.f.o -EditData LU_INDEX wrfinput_d03 < yes
@@ -77,10 +96,14 @@ function land2sea() {
             read_wrf_nc_3.f.o -EditData TMN      wrfinput_d03 < yes
             ;;
 
+        hgt )
+            remove_height
+            ;;
+
         all )
-	    land2sea 1
-	    land2sea 2
-	    land2sea 3
+            land2sea 1
+            land2sea 2
+            land2sea 3
             ;;
     esac
 
