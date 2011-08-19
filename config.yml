@@ -1,0 +1,16 @@
+---
+# Some top level directory names
+data_dir_top: ~/DATA/
+fnl_data_top: ~/DATA/FNL/
+sst_dir_top: ~/DATA/SST/
+wrf_top: ~/WRFMPI/WRFV3/
+wps_dir: ~/WRFMPI/WPS/
+dom_dir: ~/WRFMPI/domain/
+
+# the working run dirs all depend on the run name
+run_name: 
+  
+# domain dir
+dom_dir: Ea_Hok_Sb/
+dom_name: EA-HOK-SB.dom
+opt_output_from_geogrid_path='/home/yagnesh/WRFMPI/domain/Ea_Hok_Sb/test/'
