@@ -16,7 +16,10 @@
 
 # Code starts here
 # ***** CHANGES NEEDED HERE *********
+
 use strict;
+use warnings;
+
 my $stime = 20081226;
 my $etime = 20081228;
 my $email = 'yagneshraghava@gmail.com'; # your registered email ID
@@ -39,7 +42,7 @@ my $eday = substr $etime , 6;
 
 foreach my $d ( $sday .. $eday ) {
   foreach my $h ('00','06','12','18') {
-    @filelist[++$#filelist] = "$url_prefix"."$stime_prefix" . "$d" . "_" . "$h" . "_00_c";
+    $filelist[++$#filelist] = "$url_prefix"."$stime_prefix" . "$d" . "_" . "$h" . "_00_c";
   }
 }
 
@@ -55,7 +58,7 @@ $vn = (<VN> =~ /^GNU Wget (\d+)\.(\d+)/) ? (100 * $1 + $2) : 109;
 close(VN);
 $syscmd = ($vn > 109 ? 'wget --no-check-certificate' : 'wget');
 $syscmd .= ' -O /dev/null --save-cookies auth.dss_ucar_edu --post-data' .
- "='email=$email&passwd=$pswd&action=login' " .
+  "='email=$email&passwd=$pswd&action=login' " .
   'https://dss.ucar.edu/cgi-bin/login';
 system($syscmd);
 $opt = 'wget -N';
