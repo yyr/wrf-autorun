@@ -55,7 +55,7 @@ $vn = (<VN> =~ /^GNU Wget (\d+)\.(\d+)/) ? (100 * $1 + $2) : 109;
 close(VN);
 $syscmd = ($vn > 109 ? 'wget --no-check-certificate' : 'wget');
 $syscmd .= ' -O /dev/null --save-cookies auth.dss_ucar_edu --post-data' .
- "='email=yagneshraghava\@gmail.com&passwd=$pswd&action=login' " .
+ "='email=$email&passwd=$pswd&action=login' " .
   'https://dss.ucar.edu/cgi-bin/login';
 system($syscmd);
 $opt = 'wget -N';
