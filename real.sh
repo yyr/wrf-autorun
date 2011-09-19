@@ -7,10 +7,10 @@
 # Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
 #
 
-# Description: 
+# Description:
 if [ ! DirNames.sh ]; then
     echo "No ENV file"
-    echo "trying to contine..."
+    exit 24
 else
     . DirNames.sh
 fi
@@ -25,7 +25,9 @@ echo `pwd`
 #PBS -j oe
 
 # one proc is good for now
-echo Running real.sh
-mpirun -np 1 dplace -s1 ./real.exe 2>&1 | tee log.real 
+echo "Running real.sh"
+mpirun -np 6 dplace -s1 ./real.exe  2>&1 | tee log.real
 
 # real.sh ends here
+
+
