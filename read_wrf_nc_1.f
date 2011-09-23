@@ -1601,7 +1601,7 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
   real,    dimension(dim1,dim2,dim3)           ::  data_real,sst
   integer, dimension(dim1,dim2,dim3)           ::  data_int
   character (len=10)                           :: var
-  
+
 
   !------------------------------READ FIRST--------------------------------------------------
   !
@@ -1694,12 +1694,12 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
      open(99,file='sst.dat',status='unknown',FORM='unformatted')
      write(99) data_real(81:122,66:103,1)
      close(99)
-     
-     elseif ( var == 'TMN' ) then
+
+  elseif ( var == 'TMN' ) then
      ! allocate (sst(81:122,66:103,1))
      open(100,file='sst.dat',status='old',FORM='unformatted')
      read(100) sst(81:122,66:103,1)
-        data_real(81:122,66:103,1)=sst(81:122,66:103,1)
+     data_real(81:122,66:103,1)=sst(81:122,66:103,1)
 
   else
      print*,"Variable given was not one of above - so no change will be"
@@ -1716,5 +1716,5 @@ end subroutine USER_CODE
 !-------------------------------------------------------------------------------------------
 
 ! Local Variables:
-! major-mode: f90-mode
+! mode: f90
 ! End:
