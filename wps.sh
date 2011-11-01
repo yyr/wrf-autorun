@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Copyright (C) Yagnesh Raghava Yakkala. www.yagnesh.org
-#    File: run_wps.sh
+#    File: wps.sh
 #  Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
 # Created: Monday, May  2 2011
 # Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
@@ -134,9 +134,9 @@ case $Arg in
         fi
         ;;
     All*|ALL*|all* )
-        run_wps.sh geo
-        run_wps.sh ungrib
-        run_wps.sh met
+        wps.sh geo
+        wps.sh ungrib
+        wps.sh met
         ;;
     * )
         usage $0
@@ -146,4 +146,4 @@ esac
 
 exit 0;
 
-# run_wps.sh ends here
+# wps.sh ends here
