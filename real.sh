@@ -29,5 +29,3 @@ echo "Running real.sh"
 mpirun -np 6 dplace -s1 ./real.exe  2>&1 | tee log.real
 
 # real.sh ends here
-
-
