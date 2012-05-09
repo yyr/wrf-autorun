@@ -1,4 +1,4 @@
-!  Special program to only read netCDF files, and write some 
+!  Special program to only read netCDF files, and write some
 !  file information on the screen
 !  Can read input/output and static files
 !  Can read double precision file (like WRF-Var)
@@ -42,8 +42,8 @@
 !
 !=================================Run Program================================
 !  Run program:
-!      read_wrf_nc   wrf_data_file_name  [-options] 
-!      options : [-h / help] [-att] [-m] [-M z] [-s] [-S x y z] 
+!      read_wrf_nc   wrf_data_file_name  [-options]
+!      options : [-h / help] [-att] [-m] [-M z] [-s] [-S x y z]
 !                            [-v VAR] [-V VAR] [-w VAR]
 !                            [-t t1 [t2]] [-times]
 !                            [-ts xy X   Y   VAR VAR .....]
@@ -54,62 +54,62 @@
 !
 !=================================Options====================================
 !
-! -help     : Print help information                           
-! -h        : Print help information                           
+! -help     : Print help information
+! -h        : Print help information
 ! -att      : Print global attributes
 !             Work with other options.
-! -m        : Print list of fields available for each time, 
+! -m        : Print list of fields available for each time,
 !             plus the min and max values for each field
-! -M  z     : Print list of fields available for each time, 
+! -M  z     : Print list of fields available for each time,
 !             plus the min and max values for each field
 !             The min max values for 3d fields will be for
 !             the z level of the field
-! -s        : Print list of fields available for each time, 
+! -s        : Print list of fields available for each time,
 !             plus a sample value for each field
 !             Sample value is in middle of domain
-! -S  x y z : Print list of fields available for each time, 
+! -S  x y z : Print list of fields available for each time,
 !             plus a sample value for each field
 !             Sample value is at point x y z in domain
 !             Also print the header information
-! -t t1 [t2]: Print information only from time t1 to t2         
+! -t t1 [t2]: Print information only from time t1 to t2
 !             t2 is optional
 !             Work with other options.
-! -times    : Print only the times in the file                  
-! -ts       : Generate time series output 
+! -times    : Print only the times in the file
+! -ts       : Generate time series output
 !             Output for full vertical column is default, if
 !             only one level is required, use -lev
 !             xy X Y VAR VAR ...
 !                will create time series output at X Y
 !             ll lat lon VAR VAR ...
-!                will create time series output at 
+!                will create time series output at
 !                a point closest to lat/lon
 !                No interpolation takes place
 ! -lev z    : Works only with -ts
 !             Specify which level you want time series output for
 ! -rot      : Rotate winds to earth coordinates - only works with -ts
-! -v VAR    : Print basic information about field VAR           
-! -V VAR    : Print basic information about field VAR     
+! -v VAR    : Print basic information about field VAR
+! -V VAR    : Print basic information about field VAR
 !             And dump the full field out to the screen
-! -w VAR    : Write the full field out to a file VAR.out         
+! -w VAR    : Write the full field out to a file VAR.out
 ! -diag     : Add to command line if you would like to see information about
 !             the diagnostic variables pressure/height/tk
-! 
+!
 ! Default Options are [-att -s]
 !
 !=================================Special Option=============================
 !  -EditData VAR
 !
-!  This options will allow a user to READ a WRF netDFC file, CHANGE a 
+!  This options will allow a user to READ a WRF netDFC file, CHANGE a
 !  specific field and RE-WRITE it BACK into the WRF netCDF file
 !
-!  This options will CHANGE your CURRENT WRF netCDF file so PLEASE 
+!  This options will CHANGE your CURRENT WRF netCDF file so PLEASE
 !  TAKE CARE when using this option
 !
 !  ONLY one field at a time can be changed. So if you need 3 fields changed,
 !  you will need to run this program 3 times, each with a different "VAR"
 !
 !  IF you have multiple times in your WRF netCDF file, but you only want
-!  to change teh valued for ONE time, use the [-t t1 [t2]] option, ELSE 
+!  to change teh valued for ONE time, use the [-t t1 [t2]] option, ELSE
 !  ALL times will be changed
 !
 !  HOW TO USE THIS OPTION:
@@ -118,22 +118,22 @@
 !
 !  2. EDIT the SUBROUTINE USER_CODE
 !     - ADD an IF-statement block for the variable you want to change
-!            For REAL data work with array "data_real" and 
+!            For REAL data work with array "data_real" and
 !            for INTEGER data work with the array "data_int"
 !       This is to prevent a variable getting overwritten by mistake
-!     - Example 1: If you want to change all (all time periods too) 
+!     - Example 1: If you want to change all (all time periods too)
 !                  values of U to a constant 10.0 m/s, you would add
 !                  the following IF_statement
-!       elseif ( var == 'U') then   
+!       elseif ( var == 'U') then
 !           data_real = 10.0
 !       Example 2: If you want to change some of the LANDMASK data
-!       elseif ( var == 'LANDMASK') then 
+!       elseif ( var == 'LANDMASK') then
 !           data_real(10:15,20:25,1) = 0   ! will change all land points
                                            ! in the box i=10 to 15 and
                                            ! i=20 to 25 to SEA point
 !       Example 3: Change ALL ISLTYP category 3 into category 7
 !                  NOTE this is an INTEGER field
-!       elseif ( var == 'ISLTYP') then 
+!       elseif ( var == 'ISLTYP') then
 !           where (data_int == 3 )
 !             data_int = 7
 !           endwhere
@@ -144,7 +144,7 @@
 !
 !============================================================================
 ! Updates Feb 2009
-! Fix to -rot + -ts for U10 and V10 
+! Fix to -rot + -ts for U10 and V10
 ! Add unstaggering for all variables when -ts is used
 !
 ! Updates Feb 2008
@@ -160,7 +160,7 @@
 !   For PS and Lambert projects an option -rot is added to rotate
 !   winds to earth coordiantes. This only works for -ts option
 ! Add 3 diagnostic variables - pressure, height and tk
-!   Adding the option -diag to the command line will produce the 
+!   Adding the option -diag to the command line will produce the
 !   values for these 3 variables, e.g.,
 !   -s -diag
 !   -v pressure -diag
@@ -175,7 +175,7 @@
 ! Add Time Series Options
 !
 ! Updated Dec 2005
-! Fix problem with -w and -v options 
+! Fix problem with -w and -v options
 !
 !  Initial version May 2004
 !  Cindy Bruyere
@@ -219,10 +219,10 @@ MODULE map_utils
    SUBROUTINE latlon_to_ij(cdfid, proj, ts_ll, ts_xy )
 
       ! Converts input lat/lon values to the cartesian (i,j) value
-      ! for the given projection. 
+      ! for the given projection.
 
       IMPLICIT NONE
-      include 'netcdf.inc' 
+      include 'netcdf.inc'
       INTEGER                              :: cdfid, rcode, id_var, nDims, ivtype, nAtts
       REAL                                 :: ts_ll(3)
       INTEGER                              :: ts_xy(3)
@@ -268,7 +268,7 @@ MODULE map_utils
 
    SUBROUTINE llij_ps(lat,lon,proj,i,j)
       ! Given latitude (-90 to 90), longitude (-180 to 180), and the
-      ! standard polar-stereographic projection information via the 
+      ! standard polar-stereographic projection information via the
       ! public proj structure, this routine returns the i/j indices which
       ! if within the domain range from 1->nx and 1->ny, respectively.
 
@@ -279,7 +279,7 @@ MODULE map_utils
       REAL, INTENT(IN)               :: lon
       TYPE(proj_info)                :: proj
 
-      ! Declare output arguments     
+      ! Declare output arguments
       REAL, INTENT(OUT)              :: i !(x-index)
       REAL, INTENT(OUT)              :: j !(y-index)
 
@@ -336,11 +336,11 @@ MODULE map_utils
       REAL, INTENT(IN)              :: lon      ! Longitude (-180->180 E)
       TYPE(proj_info)               :: proj     ! Projection info structure
 
-      ! Output Args                 
+      ! Output Args
       REAL, INTENT(OUT)             :: i        ! Cartesian X coordinate
       REAL, INTENT(OUT)             :: j        ! Cartesian Y coordinate
 
-      ! Locals 
+      ! Locals
       REAL                          :: deltalon1
       REAL                          :: arg
       REAL                          :: deltalon
@@ -364,7 +364,7 @@ MODULE map_utils
       ctl1r = COS(tl1r)
 
       ! Compute the radius to our known lower-left (SW) corner
-      proj%rsw = proj%rebydx * ctl1r/proj%cone * & 
+      proj%rsw = proj%rebydx * ctl1r/proj%cone * &
              (TAN((90.*proj%hemi-proj%lat1)*rad_per_deg/2.) / &
               TAN((90.*proj%hemi-proj%truelat1)*rad_per_deg/2.))**proj%cone
 
@@ -391,7 +391,7 @@ MODULE map_utils
       ! Finally, if we are in the southern hemisphere, flip the i/j
       ! values to a coordinate system where (1,1) is the SW corner
       ! (what we assume) which is different than the original NCEP
-      ! algorithms which used the NE corner as the origin in the 
+      ! algorithms which used the NE corner as the origin in the
       ! southern hemisphere (left-hand vs. right-hand coordinate?)
       i = proj%hemi * i
       j = proj%hemi * j
@@ -420,7 +420,7 @@ MODULE map_utils
       clain = COS(rad_per_deg*proj%truelat1)
       proj%dlon = proj%dx / (proj%re_m * clain)
 
-      ! Compute distance from equator to origin, and store in the 
+      ! Compute distance from equator to origin, and store in the
       ! proj%rsw tag.
 
       proj%rsw = 0.
@@ -449,13 +449,13 @@ END MODULE map_utils
   program read_wrf_nc
 
   implicit none
-  character (len=80)    :: input_file                        
-  character (len=10)    :: option                        
+  character (len=80)    :: input_file
+  character (len=10)    :: option
   character (len=10)    :: plot_var
   integer               :: length_input, length_option, time1, time2
   integer               :: plot_dim(3)
   logical               :: op_att, op_diag, op_rot
-  
+
   integer               :: ts_xy(3)
   real                  :: ts_ll(3)
   character (len=10)    :: ts_var(100)
@@ -473,7 +473,7 @@ END MODULE map_utils
 ! Now read the file
   call get_info_from_cdf (input_file,length_input,op_att,op_diag,op_rot,option,   &
                           plot_var,plot_dim,time1,time2,           &
-                          ts_type,ts_xy,ts_ll,ts_i,ts_var) 
+                          ts_type,ts_xy,ts_ll,ts_i,ts_var)
 
 
   end program read_wrf_nc
@@ -519,7 +519,7 @@ END MODULE map_utils
   print*,"             Specify which level you want time series output for"
   print*," -rot      : Rotate winds to earth coordinates - only works with -ts"
   print*," -v VAR    : Print basic information about field VAR"           
-  print*," -V VAR    : Print basic information about field VAR"     
+  print*," -V VAR    : Print basic information about field VAR"
   print*,"             And dump the full field out to the screen"
   print*," -w VAR    : Write the full field out to a file VAR.out"         
   print*," -diag     : Add to command line if you would like to see information about"
@@ -538,8 +538,8 @@ END MODULE map_utils
                        time1,time2,ts_type,ts_xy,ts_ll,ts_i,ts_var)
 
   implicit none
-  character (len=80)    :: input_file                        
-  character (len=10)    :: option                        
+  character (len=80)    :: input_file
+  character (len=10)    :: option
   character (len=10)    :: plot_var
   integer               :: length_input, plot_dim(3), time1, time2
   logical               :: op_att, op_diag, op_rot
@@ -606,7 +606,7 @@ END MODULE map_utils
                call getarg(i,dummy)
                if ( dummy(1:1)=="-" .or. dummy(1:3)=="geo" .or. &
                     dummy(1:3)=="met" .or. dummy(1:3)=="wrf") then ! only one time requested
-                 i = i-1   
+                 i = i-1
                else                          ! we have a start and end time
                  read(dummy,'(i3)')idummy
                  time2 = idummy
@@ -678,7 +678,7 @@ END MODULE map_utils
                  if ( dummy(1:1) == " " ) exit
                  if ( dummy(1:1)=="-" .or. dummy(1:3)=="geo" .or. &
                       dummy(1:3)=="met" .or. dummy(1:3)=="wrf") then ! found another option
-                   i = i-1   
+                   i = i-1
                    exit
                  else                          ! read variables               
                    ts_i = ts_i + 1
@@ -722,8 +722,8 @@ END MODULE map_utils
 !------------------------------------------------------------------------------
   subroutine get_info_from_cdf( file,length_input,op_att,op_diag,op_rot,option,   &
                                 plot_var,plot_dim,time1,time2,     &
-                                ts_type,ts_xy,ts_ll,ts_i,ts_var) 
-        
+                                ts_type,ts_xy,ts_ll,ts_i,ts_var)
+
   use map_utils
 
   implicit none
@@ -741,7 +741,7 @@ END MODULE map_utils
   logical                                          :: op_att, op_diag, op_rot
   logical                                          :: FirstTime = .TRUE.
   logical                                          :: static = .FALSE.
-  
+
   character (len=80)                               :: varnam, att_name, value_chr, print_time
   character (len=80)                               :: att_sav(10)
   integer                                          :: dimids(10), FieldType
@@ -786,7 +786,7 @@ END MODULE map_utils
   TYPE(proj_info)                                  :: proj
 
 
-! Open netCDF file 
+! Open netCDF file
   if ( option == "-EditData") then
     rcode = nf_open(file(1:length_input), NF_WRITE, cdfid )
     print*,"Attempting to open netCDF file with write access"
@@ -837,7 +837,7 @@ END MODULE map_utils
     STOP
   endif
 
- 10 continue          ! come here direct for some static files        
+ 10 continue          ! come here direct for some static files
 
   rcode = nf_inq(cdfid, nDims, nVars, nAtts, unlimDimID)
   nVars_sav = nVars
@@ -857,7 +857,7 @@ END MODULE map_utils
     endif
   enddo
 
-  if ( op_att ) then 
+  if ( op_att ) then
     print*,"GLOBAL ATTRIBUTES:"
     print*," "
     do iatt = 1,nAtts
@@ -898,17 +898,17 @@ END MODULE map_utils
   rcode = NF_GET_ATT_INT(cdfid, nf_global, "MAP_PROJ", map_proj )
   proj%code = map_proj
   if ( map_proj .ge. 3 ) op_rot = .FALSE.  ! mercator, no need to rotate
-  if ( op_rot .OR. ts_type == "ll" ) then 
-      proj%latinc   = -999.9  
-      proj%loninc   = -999.9 
-      proj%dlat     = -999.9  
-      proj%dlon     = -999.9 
-      proj%hemi     =    1.0  
-      proj%polei    = -999.9 
-      proj%polej    = -999.9  
-      proj%rsw      = -999.9 
-      proj%knowni   =    1.0 
-      proj%knownj   =    1.0  
+  if ( op_rot .OR. ts_type == "ll" ) then
+      proj%latinc   = -999.9
+      proj%loninc   = -999.9
+      proj%dlat     = -999.9
+      proj%dlon     = -999.9
+      proj%hemi     =    1.0
+      proj%polei    = -999.9
+      proj%polej    = -999.9
+      proj%rsw      = -999.9
+      proj%knowni   =    1.0
+      proj%knownj   =    1.0
       proj%re_m     = 6370000.
 
       rcode = NF_GET_ATT_REAL(cdfid, nf_global, "TRUELAT1", truelat1 )
@@ -937,7 +937,7 @@ END MODULE map_utils
         ELSE
            cone = SIN(ABS(truelat1)*RAD_PER_DEG )
         ENDIF
-      endif 
+      endif
       proj%cone = cone
 
       istart        = 1
@@ -960,16 +960,16 @@ END MODULE map_utils
 
       allocate ( diff(iend(1),iend(2)))
       diff = xlong - stand_lon
-      where ( diff .gt. 180.) 
+      where ( diff .gt. 180.)
         diff = diff - 360.
       end where
-      where ( diff .lt. -180.) 
+      where ( diff .lt. -180.)
         diff = diff + 360.
       end where
 
       allocate ( alpha(iend(1),iend(2)))
       alpha = diff * cone * RAD_PER_DEG
-      where ( xlat .lt. 0.) 
+      where ( xlat .lt. 0.)
         alpha = -1. * alpha
       end where
 
@@ -1005,7 +1005,7 @@ END MODULE map_utils
 
     do itimes = time1,time2
       if ( static ) then
-        print_time = " "            
+        print_time = " "
       else
         print_time = times(itimes)
         if ( plot_var == " " .and. option .ne. "-ts" ) then
@@ -1032,14 +1032,14 @@ END MODULE map_utils
          if (allocated(data_r)) deallocate(data_r)
          allocate ( data_r(iend(1),iend(2),iend(3)))
          call ncvgt( cdfid,id_var,istart,iend,data_r,rcode)
-       endif 
+       endif
        pressure = (pressure + data_r)*0.01
        rcode = nf_inq_varid ( cdfid, "T", id_var )
        if ( rcode == 0 ) then
          if (allocated(tk)) deallocate(tk)
          allocate ( tk(iend(1),iend(2),iend(3)))
          call ncvgt( cdfid,id_var,istart,iend,tk,rcode)
-       endif 
+       endif
        tk = (tk+300.) * ( pressure / 1000. )**(287.04/1004.)
 
        iend(3)       = btdim+1
@@ -1054,10 +1054,10 @@ END MODULE map_utils
          if (allocated(data_r)) deallocate(data_r)
          allocate ( data_r(iend(1),iend(2),iend(3)))
          call ncvgt( cdfid,id_var,istart,iend,data_r,rcode)
-       endif 
+       endif
        height = ( (height+data_r) / 9.81 ) / 1000.
        if (allocated(data_r)) deallocate(data_r)
-     endif 
+     endif
 
 
      if ( op_rot ) then
@@ -1111,12 +1111,12 @@ END MODULE map_utils
          call ncvgt( cdfid,id_var,istart,iend,tmp,rcode)
          vvv = (tmp(:,1:iend(2)-1,:)+tmp(:,2:iend(2),:))*0.5
          deallocate(tmp)
-       endif 
+       endif
 
-     endif 
+     endif
 
       do idvar = 1,nVars
-        if ( option .ne. "-ts" ) then           
+        if ( option .ne. "-ts" ) then
           if ( plot_var == " " ) then
             id_var = idvar
           else
@@ -1125,7 +1125,7 @@ END MODULE map_utils
             if (rcode .ne. 0) then
               if (varnam == "pressure" .or. varnam == "height" .or. varnam == "tk" ) then
                 !!print*,"Dealing with a diagnostic - assume OK"
-                if ( .not. op_diag ) then 
+                if ( .not. op_diag ) then
                    print*,"   Must add -diag on the command line for diagnistic fields"
                    print*," "
                    STOP
@@ -1142,7 +1142,7 @@ END MODULE map_utils
           if (rcode .ne. 0) then
             if (varnam == "pressure" .or. varnam == "height" .or. varnam == "tk" ) then
               !!print*,"Dealing with a diagnostic - assume OK"
-                if ( .not. op_diag ) then 
+                if ( .not. op_diag ) then
                    print*,"   Must add -diag on the command line for diagnistic fields"
                    print*," "
                    STOP
@@ -1166,7 +1166,7 @@ END MODULE map_utils
          iend(3)   = btdim
          MemoryOrder = "XYZ"
          FieldType = 104
-         stagger = " " 
+         stagger = " "
          nDims = 4
 
          if ( idvar == nVars_sav+1 .or. varnam == 'pressure' ) then
@@ -1190,7 +1190,7 @@ END MODULE map_utils
            varnam = "height"
            units  = "km"
            description = "Model height - diagnostic"
-           stagger = "Z" 
+           stagger = "Z"
            if (allocated(data_r)) deallocate(data_r)
            allocate (data_r(iend(1),iend(2),iend(3)))
            data_r = height
@@ -1205,7 +1205,7 @@ END MODULE map_utils
             rcode = nf_inq_var( cdfid, id_var, varnam, ivtype, nDims, dimids, nAtts )
          ! Need to know if this is a real/double-real/integer field
           type_to_get = ivtype
-  
+
          ! Get units and memeory order of field
           rcode = NF_GET_ATT_TEXT(cdfid, id_var, "units", units )
           rcode = NF_GET_ATT_TEXT(cdfid, id_var, "MemoryOrder", MemoryOrder )
@@ -1214,7 +1214,7 @@ END MODULE map_utils
           rcode = NF_GET_ATT_TEXT(cdfid, id_var, "stagger", stagger )
 
           if (iachar(units(1:1)) == 0 ) units = "-"
-  
+
          ! Get the dimensions of this field
           do i=1,ndims
             rcode = nf_inq_dimlen( cdfid, dimids(i), dims(i) )
@@ -1225,7 +1225,7 @@ END MODULE map_utils
           do i = 1,nDims-1
             iend(i)     = dims(i)
           enddo
-  
+
          ! Get field from netCDF file
           if (type_to_get .eq. 5)  then                           !get_real
             allocate (data_r(iend(1),iend(2),iend(3)))
@@ -1239,9 +1239,9 @@ END MODULE map_utils
           endif
 
        endif
-        
 
-     ! Depending on the option, do something special 
+
+     ! Depending on the option, do something special
       SELECTCASE (option)
         CASE ("-s")      ! Write out all field names and a sample value of each field
              isample        = 1
@@ -1249,15 +1249,15 @@ END MODULE map_utils
                isample(i)   = iend(i)/2
                if (isample(i) == 0) isample(i) = 1
              enddo
-             if (type_to_get .eq. 5)  then 
+             if (type_to_get .eq. 5)  then
                sample_value_r = data_r(isample(1),isample(2),isample(3))
                write(*,301)varnam,nDims-1,trim(MemoryOrder),               &
                         iend(1),iend(2),iend(3),sample_value_r,trim(units)                 
-             elseif (type_to_get .eq. 6)  then  
+             elseif (type_to_get .eq. 6)  then
                sample_value_r = data_dp_r(isample(1),isample(2),isample(3))
                write(*,301)varnam,nDims-1,trim(MemoryOrder),               &
                         iend(1),iend(2),iend(3),sample_value_r,trim(units)               
-             elseif (type_to_get .eq. 4) then   
+             elseif (type_to_get .eq. 4) then
                sample_value_i = data_i(isample(1),isample(2),isample(3))
                write(*,302)varnam,nDims-1,trim(MemoryOrder),               &
                         iend(1),iend(2),iend(3),sample_value_i,trim(units)                 
@@ -1291,19 +1291,19 @@ END MODULE map_utils
                         sample_value_i,trim(units)
              endif
         CASE ("-m")      ! Write out all field names plus the min/max values
-             if (type_to_get .eq. 5)  then   
+             if (type_to_get .eq. 5)  then
                minvalue_r =  MINVAL(data_r)
                maxvalue_r =  MAXVAL(data_r)
                write(*,305)varnam,nDims-1,trim(MemoryOrder),               &
                       iend(1),iend(2),iend(3),                             &
-                      minvalue_r,maxvalue_r,trim(units)                 
-             elseif (type_to_get .eq. 6)  then 
+                      minvalue_r,maxvalue_r,trim(units)
+             elseif (type_to_get .eq. 6)  then
                minvalue_r =  MINVAL(data_dp_r)
                maxvalue_r =  MAXVAL(data_dp_r)
                write(*,305)varnam,nDims-1,trim(MemoryOrder),               &
                       iend(1),iend(2),iend(3),                             &
                       minvalue_r,maxvalue_r,trim(units)
-             elseif (type_to_get .eq. 4) then 
+             elseif (type_to_get .eq. 4) then
                minvalue_i =  MINVAL(data_i)
                maxvalue_i =  MAXVAL(data_i)
                write(*,306)varnam,nDims-1,trim(MemoryOrder),               &
@@ -1319,29 +1319,29 @@ END MODULE map_utils
                  if (isample(i) == 0) isample(i) = 1
                endif
              enddo
-             if (type_to_get .eq. 5)  then   
+             if (type_to_get .eq. 5)  then
                minvalue_r =  MINVAL (MINVAL(data_r(:,:,isample(3)),DIM=1) ,DIM=1)
                maxvalue_r =  MAXVAL (MAXVAL(data_r(:,:,isample(3)),DIM=1) ,DIM=1)
                write(*,307)varnam,nDims-1,trim(MemoryOrder),               &
                       iend(1),iend(2),iend(3),isample(3),                  &
-                      minvalue_r,maxvalue_r,trim(units)               
-             elseif (type_to_get .eq. 6)  then 
+                      minvalue_r,maxvalue_r,trim(units)
+             elseif (type_to_get .eq. 6)  then
                minvalue_r =  MINVAL (MINVAL(data_dp_r(:,:,isample(3)),DIM=1) ,DIM=1)
                maxvalue_r =  MAXVAL (MAXVAL(data_dp_r(:,:,isample(3)),DIM=1) ,DIM=1)
                write(*,307)varnam,nDims-1,trim(MemoryOrder),               &
                       iend(1),iend(2),iend(3),isample(3),                  &
-                      minvalue_r,maxvalue_r,trim(units)               
-             elseif (type_to_get .eq. 4) then 
+                      minvalue_r,maxvalue_r,trim(units)
+             elseif (type_to_get .eq. 4) then
                minvalue_i =  MINVAL (MINVAL(data_i(:,:,isample(3)),DIM=1) ,DIM=1)
                maxvalue_i =  MAXVAL (MAXVAL(data_i(:,:,isample(3)),DIM=1) ,DIM=1)
                write(*,308)varnam,nDims-1,trim(MemoryOrder),               &
                       iend(1),iend(2),iend(3),isample(3),                  &
-                      minvalue_i,maxvalue_i,trim(units)               
+                      minvalue_i,maxvalue_i,trim(units)
              endif
         CASE ("-v")      ! Write out information about specifc field
              if ( FirstTime ) then
                write(6,'(" Field                : ", A)') trim(varnam)
-               write(6,'(" FieldType            : ",i3)') FieldType 
+               write(6,'(" FieldType            : ",i3)') FieldType
                write(6,'(" Description          : ", A)') trim(description)
                write(6,'(" Units                : ", A)') trim(units)
                write(6,'(" Stagger              : ", A)') trim(stagger)
@@ -1349,20 +1349,20 @@ END MODULE map_utils
                write(6,'(" Dimensions           : ",                       &
 &                         i4," (x) ",i4, " (y) ",i4, " (z) ")')            &
                           iend(1),iend(2),iend(3)
-               write(6,'(" ")') 
+               write(6,'(" ")')
                FirstTime = .FALSE.
              endif
-             if (type_to_get .eq. 5)  then  
+             if (type_to_get .eq. 5)  then
                minvalue_r =  MINVAL(data_r)
                maxvalue_r =  MAXVAL(data_r)
                write(6,'(" ",A,"  :   MIN =",G18.10E2,"    MAX =",G18.10E2)')print_time(1:19),  &
                    minvalue_r,maxvalue_r
-             elseif (type_to_get .eq. 6)  then 
+             elseif (type_to_get .eq. 6)  then
                minvalue_r =  MINVAL(data_dp_r)
                maxvalue_r =  MAXVAL(data_dp_r)
                write(6,'(" ",A,"  :   MIN =",G18.10E2,"    MAX =",G18.10E2)')print_time(1:19),  &
                    minvalue_r,maxvalue_r
-             elseif (type_to_get .eq. 4) then 
+             elseif (type_to_get .eq. 4) then
                minvalue_i =  MINVAL(data_i)
                maxvalue_i =  MAXVAL(data_i)
                write(6,'(" ",A,"  :   MIN =",i12,"    MAX =",i12)')print_time(1:19),  &
@@ -1371,7 +1371,7 @@ END MODULE map_utils
         CASE ("-V")      ! Write out information about specifc field, plus dump field
              if ( FirstTime ) then
                write(6,'(" Field                : ", A)') trim(varnam)
-               write(6,'(" FieldType            : ",i3)') FieldType 
+               write(6,'(" FieldType            : ",i3)') FieldType
                write(6,'(" Description          : ", A)') trim(description)
                write(6,'(" Units                : ", A)') trim(units)
                write(6,'(" Stagger              : ", A)') trim(stagger)
@@ -1379,16 +1379,16 @@ END MODULE map_utils
                write(6,'(" Dimensions           : ",                       &
 &                         i4," (x) ",i4, " (y) ",i4, " (z) ")')            &
                           iend(1),iend(2),iend(3)
-               write(6,'(" ")') 
+               write(6,'(" ")')
                FirstTime = .FALSE.
              endif
              print*,"  "
              print*,"TIME: ",print_time(1:19)
-             if (type_to_get .eq. 5)  then  
+             if (type_to_get .eq. 5)  then
                print*,data_r
-             elseif (type_to_get .eq. 6)  then 
+             elseif (type_to_get .eq. 6)  then
                print*,data_dp_r
-             elseif (type_to_get .eq. 4) then 
+             elseif (type_to_get .eq. 4) then
                print*,data_i
              endif
         CASE ("-w")      ! Write out information about specifc field to a file
@@ -1397,7 +1397,7 @@ END MODULE map_utils
                open ( 13 , file=file_out )
                print*,"Data has been written to ",file_out
                write(13,'(" Field                : ", A)') trim(varnam)
-               write(13,'(" FieldType            : ",i3)') FieldType 
+               write(13,'(" FieldType            : ",i3)') FieldType
                write(13,'(" Description          : ", A)') trim(description)
                write(13,'(" Units                : ", A)') trim(units)
                write(13,'(" Stagger              : ", A)') trim(stagger)
@@ -1405,36 +1405,36 @@ END MODULE map_utils
                write(13,'(" Dimensions           : ",                       &
 &                         i4," (x) ",i4, " (y) ",i4, " (z) ")')            &
                           iend(1),iend(2),iend(3)
-               write(13,'(" ")') 
-               write(13,'("FORMAT:")') 
+               write(13,'(" ")')
+               write(13,'("FORMAT:")')
                write(13,'("  do k = 1 ,",i5)') iend(3)
                write(13,'("    do j = 1 ,",i5)') iend(2)
                write(13,'("      do i = 1 ,",i5)') iend(1)
-               write(13,'(" ")') 
+               write(13,'(" ")')
                FirstTime = .FALSE.
              endif
-             write(13,'(" ")') 
+             write(13,'(" ")')
              write(13,'("TIME: ",A)') print_time(1:19)
-             if (type_to_get .eq. 5)  then  
+             if (type_to_get .eq. 5)  then
                do k=1,iend(3)
                  do j=1,iend(2)
                    write ( 13, * ) (data_r(i,j,k),i=1,iend(1))
                  enddo
                enddo
-             elseif (type_to_get .eq. 6)  then 
+             elseif (type_to_get .eq. 6)  then
                do k=1,iend(3)
                  do j=1,iend(2)
                    write ( 13, * ) (data_dp_r(i,j,k),i=1,iend(1))
                  enddo
                enddo
-             elseif (type_to_get .eq. 4) then 
+             elseif (type_to_get .eq. 4) then
                do k=1,iend(3)
                  do j=1,iend(2)
                    write ( 13, * ) (data_i(i,j,k),i=1,iend(1))
                  enddo
                enddo
              endif
-        CASE ("-ts")      ! Generate Time Series output 
+        CASE ("-ts")      ! Generate Time Series output
              if ( FirstTime ) then
                print*,"  "
                print*,"TIME SERIES OUTPUT IS GENERATED"
@@ -1453,32 +1453,32 @@ END MODULE map_utils
                FirstTime = .FALSE.
              endif
              !  Keep all info for now - we will write later
-              if (type_to_get .eq. 5)  then  
+              if (type_to_get .eq. 5)  then
                     if ( varnam=="U" .or. varnam =="UU") then
                   data_ts(idvar,1:iend(3)) = (data_r(ts_xy(1),ts_xy(2),1:iend(3))+data_r(ts_xy(1)+1,ts_xy(2),1:iend(3)))*0.5
                 elseif ( varnam=="V" .or. varnam =="VV") then
                   data_ts(idvar,1:iend(3)) = (data_r(ts_xy(1),ts_xy(2),1:iend(3))+data_r(ts_xy(1),ts_xy(2)+1,1:iend(3)))*0.5
                 elseif ( varnam=="W" )then
                   data_ts(idvar,1:iend(3)-1) = (data_r(ts_xy(1),ts_xy(2),1:iend(3)-1)+data_r(ts_xy(1),ts_xy(2),2:iend(3)))*0.5
-                else 
+                else
                   data_ts(idvar,1:iend(3)) = data_r(ts_xy(1),ts_xy(2),1:iend(3))
                 endif
-              elseif (type_to_get .eq. 6)  then  
+              elseif (type_to_get .eq. 6)  then
                     if ( varnam=="U" .or. varnam =="UU") then
                   data_ts(idvar,1:iend(3)) = (data_dp_r(ts_xy(1),ts_xy(2),1:iend(3))+data_dp_r(ts_xy(1)+1,ts_xy(2),1:iend(3)))*0.5
                 elseif ( varnam=="V" .or. varnam =="VV") then
                   data_ts(idvar,1:iend(3)) = (data_dp_r(ts_xy(1),ts_xy(2),1:iend(3))+data_dp_r(ts_xy(1),ts_xy(2)+1,1:iend(3)))*0.5
                 elseif ( varnam=="W" )then
                   data_ts(idvar,1:iend(3)) = (data_dp_r(ts_xy(1),ts_xy(2),1:iend(3)-1)+data_dp_r(ts_xy(1),ts_xy(2),2:iend(3)))*0.5
-                else 
+                else
                   data_ts(idvar,1:iend(3)) = data_dp_r(ts_xy(1),ts_xy(2),1:iend(3))
                 endif
-              elseif (type_to_get .eq. 4)  then  
+              elseif (type_to_get .eq. 4)  then
                 data_ts(idvar,1:iend(3)) = data_i(ts_xy(1),ts_xy(2),1:iend(3))
               endif
 
              if ( op_rot ) then
-             
+
                if ( varnam == "U10" ) then
                    data_ts(idvar,1) = v10(ts_xy(1),ts_xy(2),1)*sin(alpha(ts_xy(1),ts_xy(2))) + &
                                       u10(ts_xy(1),ts_xy(2),1)*cos(alpha(ts_xy(1),ts_xy(2)))
@@ -1491,20 +1491,20 @@ END MODULE map_utils
                  do  kk = 1,iend(3)
                    data_ts(idvar,kk) = vvv(ts_xy(1),ts_xy(2),kk)*sin(alpha(ts_xy(1),ts_xy(2))) + &
                                        uuu(ts_xy(1),ts_xy(2),kk)*cos(alpha(ts_xy(1),ts_xy(2)))
-                 enddo 
+                 enddo
                endif
                if ( varnam == "V" .or. varnam == "VV" ) then
                  do  kk = 1,iend(3)
                    data_ts(idvar,kk) = vvv(ts_xy(1),ts_xy(2),kk)*cos(alpha(ts_xy(1),ts_xy(2))) - &
                                        uuu(ts_xy(1),ts_xy(2),kk)*sin(alpha(ts_xy(1),ts_xy(2)))
-                 enddo 
+                 enddo
                endif
 
              endif
              do  kk = iend(3)+1,btdim
                   data_ts(idvar,kk) = -99999.99
              enddo
-             !  Print out all vertical levels           
+             !  Print out all vertical levels
              if ( idvar == ts_i ) then
                if ( ts_xy(3) == 0 ) then
                  do kk = 1,btdim
@@ -1535,13 +1535,13 @@ END MODULE map_utils
              endif
              print*,"  "
              print*,"Changing variable: ",trim(varnam), " for time ", print_time(1:19)
-             if (type_to_get .eq. 5)  then  
+             if (type_to_get .eq. 5)  then
                CALL USER_CODE(data_r,data_dp_r,data_i,iend(1),iend(2),iend(3),varnam)
                call ncvpt( cdfid,id_var,istart,iend,data_r,rcode)
-             elseif (type_to_get .eq. 6)  then 
+             elseif (type_to_get .eq. 6)  then
                CALL USER_CODE(data_r,data_dp_r,data_i,iend(1),iend(2),iend(3),varnam)
                call ncvpt( cdfid,id_var,istart,iend,data_dp_r,rcode)
-             elseif (type_to_get .eq. 4) then 
+             elseif (type_to_get .eq. 4) then
                CALL USER_CODE(data_r,data_dp_r,data_i,iend(1),iend(2),iend(3),varnam)
                call ncvpt( cdfid,id_var,istart,iend,data_i,rcode)
              endif
@@ -1550,11 +1550,11 @@ END MODULE map_utils
              print*,"BAD option"
       END SELECT
 
-   varnam = " " 
+   varnam = " "
    ! make sure units remain a clean field
     units = "                    "
 
-   ! deallocate everything 
+   ! deallocate everything
      if (type_to_get .eq. 5) deallocate (data_r)
      if (type_to_get .eq. 6) deallocate (data_dp_r)
      if (type_to_get .eq. 4) deallocate (data_i)
@@ -1563,7 +1563,7 @@ END MODULE map_utils
   enddo
 
 ! format for -s
- 301 format(A17,"  ",i2,"  ",A3,"  ",3(1x,i4),"  ",G18.10E2,"  ",A)    
+ 301 format(A17,"  ",i2,"  ",A3,"  ",3(1x,i4),"  ",G18.10E2,"  ",A)
  302 format(A17,"  ",i2,"  ",A3,"  ",3(1x,i4),"  ",i14,"      ",A)
 ! format for -S
  303 format(A11,"  ",i2,"  ",A3,3(1x,i4),"   (x=",i4," y=",i4," z=",i4,")  ",G18.10E2,"  ",A)
@@ -1636,14 +1636,14 @@ END MODULE map_utils
      !     YAGNESH
      !     Remove Topography over hokkaido
   elseif ( var == 'HGT_U') then !
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
   elseif ( var == 'HGT_V') then !
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
   elseif ( var == 'HGT_M') then !
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
 
   elseif ( var == 'HGT') then !
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
 
      !     land points to sea points
      ! LANDMASK =0
@@ -1659,58 +1659,57 @@ END MODULE map_utils
      ! SNOALB   =0.08
      ! TMN      =SST
   elseif ( var == 'LANDMASK' ) then
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
 
   elseif ( var == 'XLAND' ) then
-     data_real(1:310,1:178,1)=2.0
+     data_real(161:346,222:489,1)=2.0
 
   elseif ( var == 'LU_INDEX' ) then
-     data_real(1:310,1:178,1)=16.0
+     data_real(161:346,222:489,1)=16.0
 
   elseif ( var == 'IVGTYP' ) then
-     data_int(1:310,1:178,1)=16
+     data_int(161:346,222:489,1)=16
 
   elseif ( var == 'ISLTYP' ) then
-     data_int(1:310,1:178,1)=14
+     data_int(161:346,222:489,1)=14
 
   elseif ( var == 'VEGFRA' ) then
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
 
   elseif ( var == 'ALBBCK' ) then
-     data_real(1:310,1:178,1)=0.08
+     data_real(161:346,222:489,1)=0.08
 
   elseif ( var == 'SHDMAX' ) then
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
 
   elseif ( var == 'SHDMIN' ) then
-     data_real(1:310,1:178,1)=0.0
+     data_real(161:346,222:489,1)=0.0
 
   elseif ( var == 'SNOALB' ) then
-     data_real(1:310,1:178,1)=0.08
+     data_real(161:346,222:489,1)=0.08
 
   elseif ( var == 'SST' ) then
      open(99,file='sst.dat',status='unknown',FORM='unformatted')
-     write(99) data_real(1:310,1:178,1)
+     write(99) data_real(161:346,222:489,1)
      close(99)
 
   elseif ( var == 'TMN' ) then
-     ! allocate (sst(1:310,1:178,1))
+     ! allocate (sst(161:346,222:489,1))
      open(100,file='sst.dat',status='old',FORM='unformatted')
-     read(100) sst(1:310,1:178,1)
-     data_real(1:310,1:178,1)=sst(1:310,1:178,1)
+     read(100) sst(161:346,222:489,1)
+     data_real(161:346,222:489,1)=sst(161:346,222:489,1)
 
 
-  else
+  Else
     print*,"Variable given was not one of above - so no change will be"
     print*,"  made to any variables"
   endif
 
   !print*,"Changes has been made to variable ",var
-  
+
   end subroutine USER_CODE
 
 !-------------------------------------------------------------------------------------------
 !-------------------------------------------------------------------------------------------
 !-------------------------------------------------------------------------------------------
 !-------------------------------------------------------------------------------------------
-

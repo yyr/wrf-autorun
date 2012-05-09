@@ -38,7 +38,7 @@ function remove_height() {
 }
 
 function land2sea() {
-    echo your input is:, $1
+    echo your input is: $1
 
     case $1 in
         d1|1|dom1 )

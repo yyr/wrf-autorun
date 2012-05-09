@@ -1637,14 +1637,14 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
      !     YAGNESH
      !     Remove Topography over hokkaido
   elseif ( var == 'HGT_U') then !
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
   elseif ( var == 'HGT_V') then !
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
   elseif ( var == 'HGT_M') then !
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
 
   elseif ( var == 'HGT') then !
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
 
 
      !     land points to sea points
@@ -1661,45 +1661,45 @@ subroutine USER_CODE (data_real,data_dp_real,data_int,dim1,dim2,dim3,var)
      ! SNOALB   =0.08
      ! TMN      =SST
   elseif ( var == 'LANDMASK' ) then
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
 
   elseif ( var == 'XLAND' ) then
-     data_real(81:122,66:103,1)=2.0
+     data_real(119:140,121:182,1)=2.0
 
   elseif ( var == 'LU_INDEX' ) then
-     data_real(81:122,66:103,1)=16.0
+     data_real(119:140,121:182,1)=16.0
 
   elseif ( var == 'IVGTYP' ) then
-     data_int(81:122,66:103,1)=16
+     data_int(119:140,121:182,1)=16
 
   elseif ( var == 'ISLTYP' ) then
-     data_int(81:122,66:103,1)=14
+     data_int(119:140,121:182,1)=14
 
   elseif ( var == 'VEGFRA' ) then
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
 
   elseif ( var == 'ALBBCK' ) then
-     data_real(81:122,66:103,1)=0.08
+     data_real(119:140,121:182,1)=0.08
 
   elseif ( var == 'SHDMAX' ) then
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
 
   elseif ( var == 'SHDMIN' ) then
-     data_real(81:122,66:103,1)=0.0
+     data_real(119:140,121:182,1)=0.0
 
   elseif ( var == 'SNOALB' ) then
-     data_real(81:122,66:103,1)=0.08
+     data_real(119:140,121:182,1)=0.08
 
   elseif ( var == 'SST' ) then
      open(99,file='sst.dat',status='unknown',FORM='unformatted')
-     write(99) data_real(81:122,66:103,1)
+     write(99) data_real(119:140,121:182,1)
      close(99)
 
   elseif ( var == 'TMN' ) then
-     ! allocate (sst(81:122,66:103,1))
+     ! allocate (sst(119:140,121:182,1))
      open(100,file='sst.dat',status='old',FORM='unformatted')
-     read(100) sst(81:122,66:103,1)
-     data_real(81:122,66:103,1)=sst(81:122,66:103,1)
+     read(100) sst(119:140,121:182,1)
+     data_real(119:140,121:182,1)=sst(119:140,121:182,1)
 
   else
      print*,"Variable given was not one of above - so no change will be"
