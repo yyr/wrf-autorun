@@ -55,6 +55,8 @@ function land2sea() {
             read_wrf_nc_1.f.o -EditData SHDMIN   wrfinput_d01 < yes
             read_wrf_nc_1.f.o -EditData SST      wrfinput_d01 < yes
             read_wrf_nc_1.f.o -EditData TMN      wrfinput_d01 < yes
+            read_wrf_nc_1.f.o -EditData SNOWC    wrfinput_d01 < yes
+            read_wrf_nc_1.f.o -EditData SNOW     wrfinput_d01 < yes
             ;;
 
         d2|2|dom2 )
@@ -71,6 +73,8 @@ function land2sea() {
             read_wrf_nc_2.f.o -EditData SHDMIN   wrfinput_d02 < yes
             read_wrf_nc_2.f.o -EditData SST      wrfinput_d02 < yes
             read_wrf_nc_2.f.o -EditData TMN      wrfinput_d02 < yes
+            read_wrf_nc_2.f.o -EditData SNOWC    wrfinput_d02 < yes
+            read_wrf_nc_2.f.o -EditData SNOW     wrfinput_d02 < yes
             ;;
 
         d3|3|dom3 )
@@ -87,6 +91,8 @@ function land2sea() {
             read_wrf_nc_3.f.o -EditData SHDMIN   wrfinput_d03 < yes
             read_wrf_nc_3.f.o -EditData SST      wrfinput_d03 < yes
             read_wrf_nc_3.f.o -EditData TMN      wrfinput_d03 < yes
+            read_wrf_nc_3.f.o -EditData SNOWC    wrfinput_d03 < yes
+            read_wrf_nc_3.f.o -EditData SNOW     wrfinput_d03 < yes
             ;;
 
         hgt )
