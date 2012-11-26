@@ -1,13 +1,14 @@
 #!/bin/bash
 #
-# Copyright (C) Yagnesh Raghava Yakkala. www.yagnesh.org
+# Copyright (C) Yagnesh Raghava Yakkala. http://yagnesh.org
 #    File: wrf-job.sh
-#  Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
 # Created: Tuesday, May 10 2011
-# Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
+# Licence: GPL v3 or later.
 #
 
 # Description:
+# create job script
+
 function usage() {		# tell the usage
         echo USAGE: "$1 <cpus> <short/mid/long> "
 }

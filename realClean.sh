@@ -2,9 +2,8 @@
 #
 # Copyright (C) Yagnesh Raghava Yakkala. http://yagnesh.org
 #    File: realClean.sh
-#  Author: Yagnesh Raghava Yakkala <yagnesh@NOSPAM.live.com>
 # Created: Monday, September 19 2011
-# Licence: GPL v3 or later.  <http://www.gnu.org/licenses/gpl.html>
+# Licence: GPL v3 or later.
 #
 
 # Description:
