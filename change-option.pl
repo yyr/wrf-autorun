@@ -1,10 +1,9 @@
 #!/usr/bin/env perl
 #
-# Copyright (C) Yagnesh Raghava Yakkala. www.yagnesh.org
+# Copyright (C) Yagnesh Raghava Yakkala. http://yagnesh.org
 #    File: change-option.pl
-#  Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
 # Created: Monday, May  2 2011
-# Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
+# Licence: GPL v3 or later.
 #
 
 # Description:
@@ -20,7 +19,7 @@ if (@ARGV != 3) {
 }
 
 (my $Conffile, my $Option, my $Val) = @ARGV;
-my $bak = `date "+%y%m%d%H%M%S"`; 
+my $bak = `date "+%y%m%d%H%M%S"`;
 chomp($bak);
 
 # FIXME This is stupid Perl must have some smart way to do it
