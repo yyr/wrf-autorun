@@ -1,7 +1,1 @@
-# Copyright (C) Yagnesh Raghava Yakkala. www.yagnesh.org
-# Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
-# Licence: GPL v3 or later
-
-#+TITLE: collection of scripts to automate WRF ARW
-
-* No way it is useful for you right now
+dirty little scripts to automate a WRF model run
