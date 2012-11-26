@@ -9,7 +9,6 @@
 # Description:
 ## clean the products/garbage from real.sh
 
-rm -f met_em*
 rm -f real.log
 rm -f wrfinput_*
 rm -f wrfbdy_d*

@@ -11,6 +11,7 @@
 function usage() {
     echo USAGE: " $1 <GEO|UNGRIB|MET|ALL>"
 }
+
 function message() {
     echo  "$@"
     echo ''
@@ -24,7 +25,7 @@ function run_geogrid() {
 
 function run_ungrib () {
     # run_ungrib <Vtable.???> <data dir to link> <data_prefix to link>
-    ln -sf ./ungrib/Variable_Tables/$1 Vtable
+    ln -sf $1 Vtable
     message linking data from $2
     ./link_grib.csh $2/$3 &&
     message running: ungrib.exe &&
