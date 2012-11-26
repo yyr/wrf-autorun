@@ -40,7 +40,7 @@ function run_metgrid() {
 function check_error() {
     if [ ! $0 == $1 ]; then
         echo Something Gone Wrong: $1;
-        exit $Error_exe
+        exit $error_exe
     fi
 }
 
@@ -49,27 +49,27 @@ function check_error() {
 cd `pwd`                        # go to the working directory possibly WPS dir
 . DirNames.sh                  # few dir names IMP to edit
 
-Error_Args=64
-Error_exe=128
-MINARGS=1
-Arg=$1
+error_args=64
+error_exe=128
+minargs=1
+arg=$1
 
 # teach usage
-if [ $# -lt $MINARGS ]
+if [ $# -lt $minargs ]
 then
     echo "${#} arguments."
     usage $0
-    exit $Error_Args;
+    exit $error_args;
 fi
 
 # Vtables
-FNL_Vtable_Name=Vtable.GFS
-SST_Vtable_Name=Vtable.SST
+fnl_vtable_name=Vtable.GFS
+sst_vtable_name=Vtable.SST
 namelist=namelist.wps
 # --------------------------------
 
 ########################################################################
-case $Arg in
+case $arg in
 
 # geogrid
     geo*|GE*|Geo* )
@@ -97,7 +97,7 @@ case $Arg in
         if [ `ls FILE* | wc -l` == 0  ]; then
             change-option.pl  $namelist prefix $prefix &&
             change-option.pl $namelist interval_seconds $interval_seconds &&
-            run_ungrib $FNL_Vtable_Name $fnl_dir $data_prefix
+            run_ungrib $fnl_vtable_name $fnl_dir $data_prefix
         else
             message skipping ungrib for FNL DATA
         fi
@@ -112,7 +112,7 @@ case $Arg in
         if [  `ls SST* | wc -l` == 0 ] ; then
             change-option.pl  $namelist prefix $prefix &&
             change-option.pl  $namelist interval_seconds $interval_seconds &&
-            run_ungrib $SST_Vtable_Name $sst_dir $data_prefix
+            run_ungrib $sst_vtable_name $sst_dir $data_prefix
         else
             message skipping ungrib for FNL DATA
         fi
