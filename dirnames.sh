@@ -1,7 +1,8 @@
 # template
 export run_name=weak1
-export run_dir_prefix=/home/yagnesh/wrf/run/
+export run_dir_prefix=/home/yagnesh/wrf/run
 export tbls_dir=$run_dir_prefix/tbls
+export wrf_bin_dir=$run_dir_prefix/bin
 
 export wrf_run_dir=$run_dir_prefix/$run_name
 export met_files_dir=$wrf_run_dir
