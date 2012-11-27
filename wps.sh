@@ -25,7 +25,7 @@ function run_geogrid() {
 
 function run_ungrib () {
     # run_ungrib <Vtable.???> <data dir to link> <data_prefix to link>
-    ln -sf $1 Vtable
+    ln -sf $tbls_dir/$1 Vtable
     message linking data from $2
     ./link_grib.csh $2/$3 &&
     message running: ungrib.exe &&
