@@ -23,6 +23,6 @@ nocpu=1
 
 # one proc is good for now
 echo "Running real.sh"
-mpirun -np $nocpu dplace -s1 ./real.exe  2>&1 | tee log.real
+mpirun -np $nocpu dplace -s1 $wrf_bin_dir/real.exe  2>&1 | tee log.real
 
 # real.sh ends here

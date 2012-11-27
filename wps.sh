@@ -19,7 +19,7 @@ function message() {
 
 function run_geogrid() {
     message running: GEOGRID.EXE
-    ./geogrid.exe | tee log.geogrid
+    $wrf_bin_dir/geogrid.exe | tee log.geogrid
     check_error $0 Geogrid.exe
 }
 
@@ -27,14 +27,14 @@ function run_ungrib () {
     # run_ungrib <Vtable.???> <data dir to link> <data_prefix to link>
     ln -sf $tbls_dir/$1 Vtable
     message linking data from $2
-    ./link_grib.csh $2/$3 &&
+    $wrf_bin_dir/link_grib.csh $2/$3 &&
     message running: ungrib.exe &&
-    ./ungrib.exe | tee log.ungrib
+    $wrf_bin_dir/ungrib.exe | tee log.ungrib
     check_error $0 Ungrib.exe
 }
 
 function run_metgrid() {
-    ./metgrid.exe | tee log.metgrid
+    $wrf_bin_dir/metgrid.exe | tee log.metgrid
     check_error $0 Metgrid.exe
 }
 
