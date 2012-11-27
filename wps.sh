@@ -47,8 +47,16 @@ function check_error() {
 
 
 ########################################################################
+envf_name=dirnames.sh
 cd `pwd`                        # go to the working directory possibly WPS dir
-. DirNames.sh                  # few dir names IMP to edit
+
+# make sure env file is there
+if [ ! $envf_name ]; then
+    echo "No ENV file"
+    exit 24
+else
+    . $envf_name
+fi
 
 error_args=64
 error_exe=128

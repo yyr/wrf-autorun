@@ -9,6 +9,8 @@
 # Description:
 # create job script
 
+envf_name=dirnames.sh
+
 function usage() {		# tell the usage
         echo USAGE: "$1 <cpus> <short/mid/long> "
 }
@@ -25,11 +27,11 @@ then
 fi
 
 # make sure env file is there
-if [ ! DirNames.sh ]; then
+if [ ! $envf_name ]; then
     echo "No ENV file"
     exit 24
 else
-    . DirNames.sh
+    . $envf_name
 fi
 
 echo wrf.exe dir is: $wrf_run_dir

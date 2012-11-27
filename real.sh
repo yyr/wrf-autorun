@@ -7,14 +7,17 @@
 #
 
 # Description:
-if [ ! -f DirNames.sh ]; then
+# make sure env file is there
+envf_name=dirnames.sh
+
+if [ ! $envf_name ]; then
     echo "No ENV file"
     exit 24
 else
-    . DirNames.sh
+    . $envf_name
 fi
 
-ln -s "$met_files_dir/met_em*" .
+#ln -s "$met_files_dir/met_em*" .
 echo `pwd`
 
 #PBS -q short
