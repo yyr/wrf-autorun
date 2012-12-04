@@ -45,7 +45,7 @@ echo '#!/bin/bash' > wrf.sh
 chmod +x wrf.sh
 echo "#PBS -q $job_type" >> wrf.sh
 echo '#PBS -l ncpus='$cpus >> wrf.sh
-echo "#PBS -N $Run_name" >> wrf.sh
+echo "#PBS -N $run_name" >> wrf.sh
 echo "#PBS -o log.wrf" >> wrf.sh
 echo '#PBS -j oe' >> wrf.sh
 echo '' >> wrf.sh
