@@ -8,8 +8,9 @@ export wrf_run_dir=$run_dir_prefix/$run_name
 export met_files_dir=$wrf_run_dir
 
 # DATA directory
-export fnl_dir=/home/yagnesh/DATA/FNL/weak1
-export sst_dir=/home/yagnesh/DATA/SST/weak1
+export data_dir_prefix=/home/yagnesh/DATA
+export fnl_dir=$data_dir_prefix/FNL/weak1
+export sst_dir=$data_dir_prefix/SST/weak1
 
 # domain dir
 export opt_output_from_geogrid_path=$wrf_run_dir
