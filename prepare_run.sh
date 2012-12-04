@@ -30,21 +30,21 @@ mkdir -p $run_name
 
 cd $run_name
 
-echo "export run_name=$run_name" > dirnames.sh
-echo "export run_dir_prefix=$run_dir_prefix" >> dirnames.sh
-echo "export tbls_dir=$run_dir_prefix/tbls" >> dirnames.sh
-echo "export wrf_bin_dir=$run_dir_prefix/bin" >> dirnames.sh
-echo >> dirnames.sh
-echo "export wrf_run_dir=$run_dir_prefix/$run_name" >> dirnames.sh
-echo "export met_files_dir=$wrf_run_dir" >> dirnames.sh
-echo >> dirnames.sh
-echo  >> dirnames.sh
-echo "export data_dir_prefix=$data_dir_prefix" >> dirnames.sh
-echo "export fnl_dir=$data_dir_prefix/FNL/weak1" >> dirnames.sh
-echo "export sst_dir=$data_dir_prefix/SST/weak1" >> dirnames.sh
-echo >> dirnames.sh
-echo >> dirnames.sh
-echo "export opt_output_from_geogrid_path=$wrf_run_dir" >> dirnames.sh
+cat  <<EOF > dirname.sh
+export run_name=$run_name
+export run_dir_prefix=$run_dir_prefix
+export tbls_dir=$run_dir_prefix/tbls
+export wrf_bin_dir=$run_dir_prefix/bin
+
+export wrf_run_dir=$run_dir_prefix/$run_name
+export met_files_dir=$wrf_run_dir
+
+export data_dir_prefix=$data_dir_prefix
+export fnl_dir=$data_dir_prefix/FNL/$run_name
+export sst_dir=$data_dir_prefix/SST/$run_name
+
+export opt_output_from_geogrid_path=$wrf_run_dir
+EOF
 
 echo "prepared $run_dir_prefix/$run_name for wrf run named \"$run_name\""
 # prepare_run.sh ends here
