@@ -21,8 +21,6 @@ export run_name=$1
 # template
 export run_dir_prefix=/home/yagnesh/wrf/run
 export data_dir_prefix=/home/yagnesh/DATA
-export fnl_dir=$data_dir_prefix/FNL/weak1
-export sst_dir=$data_dir_prefix/SST/weak1
 export wrf_run_dir=$run_dir_prefix/$run_name
 
 cd $run_dir_prefix
@@ -30,7 +28,7 @@ mkdir -p $run_name
 
 cd $run_name
 
-cat  <<EOF > dirname.sh
+cat  <<EOF > dirnames.sh
 export run_name=$run_name
 export run_dir_prefix=$run_dir_prefix
 export tbls_dir=$run_dir_prefix/tbls
