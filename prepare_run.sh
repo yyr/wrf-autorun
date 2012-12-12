@@ -11,7 +11,8 @@ minargs=1
 if [ $# -lt $minargs ]
 then
     echo "${#} arguments."
-    echo USAGE: " $1 <run_name>"
+    echo USAGE: " $(basename ${0}) <run_name>"
+    exit
 fi
 
 export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
