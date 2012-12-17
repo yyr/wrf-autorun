@@ -19,16 +19,13 @@ if (@ARGV != 3) {
 }
 
 (my $Conffile, my $Option, my $Val) = @ARGV;
-my $bak = `date "+%y%m%d%H%M%S"`;
-chomp($bak);
 
-# FIXME This is stupid Perl must have some smart way to do it
-copy("$Conffile","$Conffile.$bak") or die "cann't backup: $!";
-open(my $IN ,"<","$Conffile.$bak") or die "cannot open $Conffile: $!";
+open(my $IN ,"<","$Conffile") or die "cannot open $Conffile: $!";
+my @contents = <$IN>;
 
 open(my $OUT, ">", $Conffile) or die "cannot open $Conffile: $!";
 
-while (<$IN>) {
+foreach (@contents) {
   chomp();
   if (/($Option.*)=(.*)/) {
     $_ =~ s/$2/ $Val,/;
