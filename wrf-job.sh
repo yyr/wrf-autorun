@@ -10,6 +10,7 @@
 # create job script
 
 envf_name=dirnames.sh
+jobfname="job.sh"
 
 function usage() {		# tell the usage
         echo USAGE: "$1 <cpus> <short/mid/long> "
@@ -41,21 +42,25 @@ cpus=$1
 job_type=$2
 # echo cpus: $cpus
 
-echo '#!/bin/bash' > wrf.sh
-chmod +x wrf.sh
-echo "#PBS -q $job_type" >> wrf.sh
-echo '#PBS -l ncpus='$cpus >> wrf.sh
-echo "#PBS -N $run_name" >> wrf.sh
-echo "#PBS -o log.wrf" >> wrf.sh
-echo '#PBS -j oe' >> wrf.sh
-echo '' >> wrf.sh
-echo "cd $wrf_run_dir" >> wrf.sh
-echo '' >> wrf.sh
+cat <<EOF > $jobfname
+#!/bin/bash
 
-echo "# No of Cpus: $cps" >> wrf.sh
-echo "mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe " >> wrf.sh
+#PBS -q $job_type
+#PBS -l ncpus=$cpus
+#PBS -N $run_name
+#PBS -o log.wrf
+#PBS -j oe
 
-echo \"wrf.sh\" is Created
+cd $wrf_run_dir
+
+# No of Cpus:
+mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe
+
+EOF
+
+chmod +x $jobfname
+
+echo "Job script: \"job.sh\" is created."
 # qsub wrf.sh
 
 # wrf-job.sh ends here
