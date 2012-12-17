@@ -20,7 +20,7 @@ export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 export run_name=$1
 
 # template
-export run_dir_prefix=/home/yagnesh/wrf/run
+export run_dir_prefix=$(pwd)
 export data_dir_prefix=/home/yagnesh/DATA
 export wrf_run_dir=$run_dir_prefix/$run_name
 
