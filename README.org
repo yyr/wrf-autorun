@@ -1,3 +1,6 @@
 dirty little scripts to automate a WRF model run
 
+Expects ~dirnames.sh~ with definitions of environment variables in current
+working directory. see ~prepare_run.sh~
+
 license: GPL v3 or later
