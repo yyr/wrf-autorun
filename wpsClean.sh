@@ -15,4 +15,9 @@ rm -f PFILE*
 rm -f namelist.wps.1*
 rm -f GRIBFILE.*
 
+if [ $1 ] && [ $1 == "-a" ]; then
+    rm *.log
+    rm log.*
+fi
+
 # wps_clean.sh ends here
