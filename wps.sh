@@ -20,7 +20,7 @@ function message() {
 function run_geogrid() {
     message running: GEOGRID.EXE
     $wrf_bin_dir/geogrid.exe | tee log.geogrid
-    check_error $0 Geogrid.exe
+    check_error $0 geogrid.exe
 }
 
 function run_ungrib () {
@@ -30,17 +30,17 @@ function run_ungrib () {
     $wrf_bin_dir/link_grib.csh $2/$3 &&
     message running: ungrib.exe &&
     $wrf_bin_dir/ungrib.exe | tee log.ungrib
-    check_error $0 Ungrib.exe
+    check_error $0 ungrib.exe
 }
 
 function run_metgrid() {
     $wrf_bin_dir/metgrid.exe | tee log.metgrid
-    check_error $0 Metgrid.exe
+    check_error $0 metgrid.exe
 }
 
 function check_error() {
     if [ ! $0 == $1 ]; then
-        echo Something Gone Wrong: $1;
+        echo Something has gone wrong: $1;
         exit $error_exe
     fi
 }
