@@ -51,6 +51,12 @@ cat <<EOF > $jobfname
 #PBS -o log.wrf
 #PBS -j oe
 
+EOF
+
+cat $run_dir_prefix/ld.source   >> $jobfname
+
+cat <<EOF  >> $jobfname
+
 cd $wrf_run_dir
 
 # No of Cpus:
@@ -60,7 +66,11 @@ EOF
 
 chmod +x $jobfname
 
-echo "Job script: \"job.sh\" is created."
-# qsub wrf.sh
+echo "Job script: \"$jobfname\" is created.
+
+-------------------------------------------
+$(cat $jobfname)
+-------------------------------------------
+"
 
 # wrf-job.sh ends here
