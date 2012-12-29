@@ -1,6 +1,36 @@
-dirty little scripts to automate a WRF model run
+Dirty little scripts to automate a WRF model run.
 
 Expects ~dirnames.sh~ with definitions of environment variables in current
 working directory. see ~prepare_run.sh~
+
+I keep the following Structure. Some of the folders are created automatically
+by [[https://github.com/yyr/wrf_install][wrf_install]] package.
+
+Folder structure:
+#+BEGIN_EXAMPLE
+ ~/DATA/
+    |
+    |-> SST
+    |    |-> case1
+    |    |-> case2
+    |
+    |-> FNL
+
+ ~/wrf/
+    |-> run
+    |    |-> bin  -- links of executables (wrf.exe, real.exe, geogrid.exe ...)
+    |    |-> tbls -- Vtables at one place.
+    |    |-> case1
+    |    |-> case2
+    |         ...
+    |
+    |->  gcc  -- wrf build with gcc compiler
+    |
+    |->  intel -- wrf build with intel compiler
+    |
+    |->  src  -- sources of wrf and its dependencies.
+
+#+END_EXAMPLE
+
 
 license: GPL v3 or later
