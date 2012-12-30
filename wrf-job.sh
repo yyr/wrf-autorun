@@ -60,7 +60,7 @@ cat <<EOF  >> $jobfname
 cd $wrf_run_dir
 
 # No of Cpus:
-mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe
+time mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe
 
 EOF
 
