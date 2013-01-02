@@ -27,6 +27,8 @@ export wrf_run_dir=$run_dir_prefix/$run_name
 
 cd $run_dir_prefix
 mkdir -p $run_name
+mkdir -p $data_dir_prefix/FNL/$run_name
+mkdir -p $data_dir_prefix/SST/$run_name
 
 cd $run_name
 
