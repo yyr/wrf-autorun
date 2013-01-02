@@ -6,6 +6,8 @@
 # Licence: GPL v3 or later.
 #
 
+real_exe="real.exe.gcc"
+
 # Description:
 # make sure env file is there
 envf_name=dirnames.sh
@@ -19,10 +21,10 @@ fi
 
 #ln -s "$met_files_dir/met_em*" .
 echo `pwd`
-nocpu=1
+nocpu=6
 
 # one proc is good for now
 echo "Running real.sh"
-mpirun -np $nocpu dplace -s1 $wrf_bin_dir/real.exe  2>&1 | tee log.real
+mpirun -np $nocpu dplace -s1 $wrf_bin_dir/$real_exe  2>&1 | tee log.real
 
 # real.sh ends here
