@@ -59,12 +59,12 @@ cat <<EOF  >> $jobfname
 
 cd $wrf_run_dir
 
-echo "Job started at $(date) "
+echo "Job started at \$(date) "
 
 # No of Cpus:
 time mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe
 
-echo "Job finished at $(date) "
+echo "Job finished at \$(date) "
 
 EOF
 
