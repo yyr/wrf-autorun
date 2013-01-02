@@ -13,6 +13,10 @@ fnl_vtable_name=Vtable.GFS
 sst_vtable_name=Vtable.SST
 namelist=namelist.wps
 
+geogrid_exe="geogrid.exe"
+ungrib_exe="ungrib.exe"
+metgrid_exe="metgrid.exe"
+
 envf_name=dirnames.sh
 cd `pwd`                        # go to the working directory possibly WPS dir
 
@@ -51,8 +55,8 @@ function message() {
 
 function run_geogrid() {
     message running: GEOGRID.EXE
-    $wrf_bin_dir/geogrid.exe | tee log.geogrid
-    check_error $0 geogrid.exe
+    $wrf_bin_dir/${geogrid_exe} | tee log.geogrid
+    check_error $0 ${geogrid_exe}
 }
 
 function run_ungrib () {
@@ -60,14 +64,14 @@ function run_ungrib () {
     ln -sf $tbls_dir/$1 Vtable
     message linking data from $2
     $wrf_bin_dir/link_grib.csh $2/$3 &&
-    message running: ungrib.exe &&
-    $wrf_bin_dir/ungrib.exe | tee log.ungrib
-    check_error $0 ungrib.exe
+    message running: ${ungrib_exe} &&
+    $wrf_bin_dir/${ungrib_exe} | tee log.ungrib
+    check_error $0 ${ungrib_exe}
 }
 
 function run_metgrid() {
-    $wrf_bin_dir/metgrid.exe | tee log.metgrid
-    check_error $0 metgrid.exe
+    $wrf_bin_dir/${metgrid_exe} | tee log.metgrid
+    check_error $0 ${metgrid_exe}
 }
 
 function check_error() {
