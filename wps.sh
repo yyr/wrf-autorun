@@ -8,6 +8,38 @@
 # Description:
 # run the wps program automatically
 
+# Vtables
+fnl_vtable_name=Vtable.GFS
+sst_vtable_name=Vtable.SST
+namelist=namelist.wps
+
+envf_name=dirnames.sh
+cd `pwd`                        # go to the working directory possibly WPS dir
+
+# make sure env file is there
+if [ ! ./$envf_name ]; then
+    echo "No ENV file"
+    exit 24
+else
+    . ./$envf_name
+fi
+
+error_args=64
+error_exe=128
+minargs=1
+arg=$1
+
+
+# teach usage
+if [ $# -lt $minargs ]
+then
+    echo "${#} arguments."
+    usage $0
+    exit $error_args;
+fi
+
+
+#-----------------------------------------------------------------------
 function usage() {
     echo USAGE: " $1 <GEO|UNGRIB|MET|ALL>"
 }
@@ -44,47 +76,14 @@ function check_error() {
         exit $error_exe
     fi
 }
+#-----------------------------------------------------------------------
 
-
-########################################################################
-envf_name=dirnames.sh
-cd `pwd`                        # go to the working directory possibly WPS dir
-
-# make sure env file is there
-if [ ! ./$envf_name ]; then
-    echo "No ENV file"
-    exit 24
-else
-    . ./$envf_name
-fi
-
-error_args=64
-error_exe=128
-minargs=1
-arg=$1
-
-# teach usage
-if [ $# -lt $minargs ]
-then
-    echo "${#} arguments."
-    usage $0
-    exit $error_args;
-fi
-
-# Vtables
-fnl_vtable_name=Vtable.GFS
-sst_vtable_name=Vtable.SST
-namelist=namelist.wps
-# --------------------------------
-
-########################################################################
 case $arg in
 
 # geogrid
     geo*|GE*|Geo* )
 # name list options
 # opt_output_from_geogrid_path=${opt_output_from_geogrid_path:`pwd`}
-#--------------
         echo "opt_output_from_geogrid_path::---->" $opt_output_from_geogrid_path
         if [ `ls $opt_output_from_geogrid_path/geo_* | wc -l` == 0 ]; then
             change-option.pl $namelist opt_output_from_geogrid_path \'$opt_output_from_geogrid_path\' &&
@@ -97,12 +96,10 @@ case $arg in
 
 # ungrib
     ung*|Ung*|UNG* )
-# FNL
-# name list options
+        # FNL
         prefix=\'FILE\'
         interval_seconds=21600
         data_prefix=fnl
-#--------------
         if [ `ls FILE* | wc -l` == 0  ]; then
             change-option.pl  $namelist prefix $prefix &&
             change-option.pl $namelist interval_seconds $interval_seconds &&
@@ -111,13 +108,10 @@ case $arg in
             message skipping ungrib for FNL DATA
         fi
 
-# SST
-# ----------------
-# name list options
+        # SST
         prefix=\'SST\'
         interval_seconds=86400
         data_prefix=rtg
-#--------------
         if [  `ls SST* | wc -l` == 0 ] ; then
             change-option.pl  $namelist prefix $prefix &&
             change-option.pl  $namelist interval_seconds $interval_seconds &&
@@ -127,12 +121,9 @@ case $arg in
         fi
         ;;
 
-
 # metgrid
     met*|Met*|MET* )
-# name list options
         interval_seconds=21600
-#--------------
         if [  `ls met_em* | wc -l` == 0 ] ; then
             change-option.pl $namelist interval_seconds $interval_seconds &&
             run_metgrid
@@ -140,17 +131,18 @@ case $arg in
             message Do you ALREADY INPUT data???
         fi
         ;;
+
     All*|ALL*|all* )
         wps.sh geo
         wps.sh ungrib
         wps.sh met
         ;;
+
     * )
         usage $0
         ;;
 esac
-########################################################################
-
+#-----------------------------------------------------------------------
 exit 0;
 
 # wps.sh ends here
