@@ -34,7 +34,7 @@ minargs=1
 arg=$1
 
 function usage() {
-    echo USAGE: " $1 <GEO|UNGRIB|MET|ALL>"
+    echo USAGE: " $1 <geo|ungrib|met|all|clean>"
 }
 
 # teach usage
@@ -133,6 +133,17 @@ case $arg in
         else
             message Do you ALREADY INPUT data???
         fi
+        ;;
+
+    clean*|CLEAN*|cle )
+        rm -if met_em.*
+        rm -if FILE*
+        rm -if SST*
+        rm -if geo_em*
+        rm -if PFILE*
+        rm -if namelist.wps.1*
+        rm -if GRIBFILE.*
+
         ;;
 
     All*|ALL*|all* )
