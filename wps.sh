@@ -33,6 +33,9 @@ error_exe=128
 minargs=1
 arg=$1
 
+function usage() {
+    echo USAGE: " $1 <GEO|UNGRIB|MET|ALL>"
+}
 
 # teach usage
 if [ $# -lt $minargs ]
@@ -44,10 +47,6 @@ fi
 
 
 #-----------------------------------------------------------------------
-function usage() {
-    echo USAGE: " $1 <GEO|UNGRIB|MET|ALL>"
-}
-
 function message() {
     echo  "$@"
     echo ''
