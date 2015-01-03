@@ -63,8 +63,8 @@ function run_ungrib () {
     ln -sf $tbls_dir/$1 Vtable
     message linking data from $2
     $wrf_bin_dir/link_grib.csh $2/$3 &&
-    message running: ${ungrib_exe} &&
-    $wrf_bin_dir/${ungrib_exe} | tee log.ungrib
+        message running: ${ungrib_exe} &&
+        $wrf_bin_dir/${ungrib_exe} | tee log.ungrib
     check_error $0 ${ungrib_exe}
 }
 
@@ -83,21 +83,21 @@ function check_error() {
 
 case $arg in
 
-# geogrid
+    # geogrid
     geo*|GE*|Geo* )
-# name list options
-# opt_output_from_geogrid_path=${opt_output_from_geogrid_path:`pwd`}
+        # name list options
+        # opt_output_from_geogrid_path=${opt_output_from_geogrid_path:`pwd`}
         echo "opt_output_from_geogrid_path::---->" $opt_output_from_geogrid_path
         if [ `ls $opt_output_from_geogrid_path/geo_* | wc -l` == 0 ]; then
             change-option.pl $namelist opt_output_from_geogrid_path \'$opt_output_from_geogrid_path\' &&
-            run_geogrid
+                run_geogrid
         else
             message skipping geogrid.exe
         fi
         ;;
 
 
-# ungrib
+    # ungrib
     ung*|Ung*|UNG* )
         # FNL
         prefix=\'FILE\'
@@ -105,8 +105,8 @@ case $arg in
         data_prefix=fnl
         if [ `ls FILE* | wc -l` == 0  ]; then
             change-option.pl  $namelist prefix $prefix &&
-            change-option.pl $namelist interval_seconds $interval_seconds &&
-            run_ungrib $fnl_vtable_name $fnl_dir $data_prefix
+                change-option.pl $namelist interval_seconds $interval_seconds &&
+                run_ungrib $fnl_vtable_name $fnl_dir $data_prefix
         else
             message skipping ungrib for FNL DATA
         fi
@@ -117,19 +117,19 @@ case $arg in
         data_prefix=rtg
         if [  `ls SST* | wc -l` == 0 ] ; then
             change-option.pl  $namelist prefix $prefix &&
-            change-option.pl  $namelist interval_seconds $interval_seconds &&
-            run_ungrib $sst_vtable_name $sst_dir $data_prefix
+                change-option.pl  $namelist interval_seconds $interval_seconds &&
+                run_ungrib $sst_vtable_name $sst_dir $data_prefix
         else
             message skipping ungrib for FNL DATA
         fi
         ;;
 
-# metgrid
+    # metgrid
     met*|Met*|MET* )
         interval_seconds=21600
         if [  `ls met_em* | wc -l` == 0 ] ; then
             change-option.pl $namelist interval_seconds $interval_seconds &&
-            run_metgrid
+                run_metgrid
         else
             message Do you ALREADY INPUT data???
         fi
