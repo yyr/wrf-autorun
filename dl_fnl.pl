@@ -41,7 +41,7 @@ my $eday = substr $etime , 6;
 
 foreach my $d ( $sday .. $eday ) {
   foreach my $h ('00','06','12','18') {
-    $filelist[++$#filelist] = "$url_prefix"."$stime_prefix" . "$d" . "_" . "$h" . "_00";
+    $filelist[++$#filelist] = "$url_prefix"."$stime_prefix" . "$d" . "_" . "$h" . "_00" . ".grib1";
   }
 }
 
@@ -56,21 +56,21 @@ open VN, "wget -V |" or die 'cannot find wget';
 $vn = (<VN> =~ /^GNU Wget (\d+)\.(\d+)/) ? (100 * $1 + $2) : 109;
 close(VN);
 $syscmd = ($vn > 109 ? 'wget --no-check-certificate' : 'wget');
-$syscmd .= ' -O /dev/null --save-cookies auth.dss_ucar_edu --post-data' .
-  "='email=$email&passwd=$pswd&action=login' " .
-  'https://dss.ucar.edu/cgi-bin/login';
+$syscmd .= ' -O /dev/null --save-cookies auth.rda_ucar_edu --post-data' .
+  "=\"email=$email&passwd=$pswd&action=login\" " .
+  'https://rda.ucar.edu/cgi-bin/login';
 system($syscmd);
 $opt = 'wget -N';
 $opt .= ' --no-check-certificate' if($vn > 109);
-$opt .= ' --load-cookies auth.dss_ucar_edu ' .
-  'http://dss.ucar.edu/dsszone/ds083.2/';
+$opt .= ' --load-cookies auth.rda_ucar_edu ' .
+  'http://rda.ucar.edu/data/ds083.2/';
 
 for ($i = 0; $i < @filelist; $i++) {
   $syscmd = $opt . $filelist[$i];
   print "$syscmd...\n";
   system($syscmd);
 }
-system('rm -f auth.dss_ucar_edu');
+system('rm -f auth.rda_ucar_edu');
 exit 0;
 
 # dl_fnl.pl ends here
