@@ -6,7 +6,8 @@
 # Licence: GPL v3 or later.
 #
 
-real_exe="real.exe.gcc"
+exe_suffix=".intel"
+real_exe="real.exe""exe_suffix"
 
 # Description:
 # make sure env file is there
