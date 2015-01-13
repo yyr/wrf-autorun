@@ -68,7 +68,7 @@ mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe.intel
 t="\$((\$(date +%s)-t))"
 echo "Job finished at \$(date "+%F %H:%M:%S")"
 printf "\n Elapsed %02dH:%02dM\n" "\$((t/3600))" "\$((t%3600/60))"
-echo $t
+echo \$t
 EOF
 
 chmod +x $jobfname
