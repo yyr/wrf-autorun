@@ -21,8 +21,9 @@ fi
 
 #ln -s "$met_files_dir/met_em*" .
 echo `pwd`
-nocpu=6
+nocpu=10
 
+ulimit -s unlimited
 # one proc is good for now
 echo "Running real.sh"
 mpirun -np $nocpu dplace -s1 $wrf_bin_dir/$real_exe  2>&1 | tee log.real
