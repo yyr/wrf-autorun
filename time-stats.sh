@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Description:
-# http://www.mmm.ucar.edu/wrf/WG2/bench/
+# http://www2.mmm.ucar.edu/wrf/WG2/bench/
 
 grep 'Timing for main' rsl.error.0000  | \
     grep " 3:" | \
