@@ -13,9 +13,12 @@ fnl_vtable_name=Vtable.GFS
 sst_vtable_name=Vtable.SST
 namelist=namelist.wps
 
-geogrid_exe="geogrid.exe"
-ungrib_exe="ungrib.exe"
-metgrid_exe="metgrid.exe"
+exe_suffix=""
+export  LD_LIBRARY_PATH=/home/yagnesh/wrf/intel/lib/:$LD_LIBRARY_PATH
+
+geogrid_exe="geogrid.exe""$exe_suffix"
+ungrib_exe="ungrib.exe""$exe_suffix"
+metgrid_exe="metgrid.exe""$exe_suffix"
 
 envf_name=dirnames.sh
 cd `pwd`                        # go to the working directory possibly WPS dir
