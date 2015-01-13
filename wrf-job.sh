@@ -59,12 +59,15 @@ cat <<EOF  >> $jobfname
 
 cd $wrf_run_dir
 
-echo "Job started at \$(date) "
+echo "Job started at \$(date)"
 
+t="\$(date "+%F %H:%M:%S")"
 # No of Cpus:
-time mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe
+mpirun -np $cpus dplace -s1 $wrf_bin_dir/wrf.exe.intel
 
-echo "Job finished at \$(date) "
+t="\$((\$(date +%s)-t))"
+echo "Job finished at \$(date "+%F %H:%M:%S")"
+printf "\n Elapsed %02d:%02d\n" "\$((t/3600))" "\$((t%3600/60))"
 
 EOF
 
