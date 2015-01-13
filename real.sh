@@ -8,6 +8,7 @@
 
 exe_suffix=".intel"
 real_exe="real.exe""exe_suffix"
+export  LD_LIBRARY_PATH=/home/yagnesh/wrf/intel/lib/:$LD_LIBRARY_PATH
 
 # Description:
 # make sure env file is there
