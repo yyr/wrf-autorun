@@ -7,6 +7,8 @@
 
 minargs=1
 
+user=$(whoami)
+
 # teach usage
 if [ $# -lt $minargs ]
 then
@@ -19,10 +21,10 @@ export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 export run_name=$1
 
 # template
-export wrf_build_dir=/home/yagnesh/wrf/intel/WRFV3
-export data_dir_prefix=/home/yagnesh/DATA
+export wrf_build_dir=/home/${user}/wrf/gcc/WRFV3
+export data_dir_prefix=/home/${user}/DATA
 
-export run_dir_prefix=$(pwd)
+export run_dir_prefix=/home/${user}/wrf/run
 export wrf_run_dir=$run_dir_prefix/$run_name
 
 cd $run_dir_prefix
@@ -50,7 +52,7 @@ EOF
 
 ln -sf $wrf_build_dir/run/*TBL* .
 ln -sf $wrf_build_dir/run/*DATA* .
-cp $run_dir_prefix/nl/namelist* .
+# cp $run_dir_prefix/nl/namelist* .
 
 echo "prepared $run_dir_prefix/$run_name for wrf run named \"$run_name\""
 # prepare_run.sh ends here
