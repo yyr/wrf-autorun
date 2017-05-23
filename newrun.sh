@@ -52,7 +52,13 @@ EOF
 
 ln -sf $wrf_build_dir/run/*TBL* .
 ln -sf $wrf_build_dir/run/*DATA* .
-# cp $run_dir_prefix/nl/namelist* .
+
+if [ -d ${run_dir_prefix/nl} ]; then
+    cp $run_dir_prefix/nl/namelist* .
+else
+    echo "namelist files are not available at $run_dir_prefix/nl/ "
+fi
+
 
 echo "prepared $run_dir_prefix/$run_name for wrf run named \"$run_name\""
 # prepare_run.sh ends here
