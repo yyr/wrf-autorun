@@ -13,7 +13,7 @@ fnl_vtable_name=Vtable.GFS
 sst_vtable_name=Vtable.SST
 namelist=namelist.wps
 
-exe_suffix=".intel"
+exe_suffix=""
 export  LD_LIBRARY_PATH=/home/yagnesh/wrf/intel/lib/:$LD_LIBRARY_PATH
 
 geogrid_exe="geogrid.exe""$exe_suffix"

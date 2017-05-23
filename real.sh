@@ -6,7 +6,7 @@
 # Licence: GPL v3 or later.
 #
 
-exe_suffix=".intel"
+exe_suffix=""
 real_exe="real.exe""exe_suffix"
 export  LD_LIBRARY_PATH=/home/yagnesh/wrf/intel/lib/:$LD_LIBRARY_PATH
 
