@@ -111,7 +111,7 @@ case $arg in
                 change-option.pl $namelist interval_seconds $interval_seconds &&
                 run_ungrib $fnl_vtable_name $fnl_dir $data_prefix
         else
-            message skipping ungrib for FNL DATA
+            message skipping ungrib for FNL DATA..
         fi
 
         # SST
@@ -123,7 +123,7 @@ case $arg in
                 change-option.pl  $namelist interval_seconds $interval_seconds &&
                 run_ungrib $sst_vtable_name $sst_dir $data_prefix
         else
-            message skipping ungrib for FNL DATA
+            message skipping ungrib for SST DATA..
         fi
         ;;
 
@@ -134,7 +134,7 @@ case $arg in
             change-option.pl $namelist interval_seconds $interval_seconds &&
                 run_metgrid
         else
-            message Do you ALREADY INPUT data???
+            message It seems, you have INPUT data.. skipping..
         fi
         ;;
 
