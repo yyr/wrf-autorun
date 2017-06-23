@@ -7,7 +7,7 @@
 #
 
 exe_suffix=""
-real_exe="real.exe""exe_suffix"
+real_exe="real.exe"$exe_suffix
 export  LD_LIBRARY_PATH=/home/yagnesh/wrf/intel/lib/:$LD_LIBRARY_PATH
 
 # Description:
@@ -28,6 +28,7 @@ nocpu=10
 ulimit -s unlimited
 # one proc is good for now
 echo "Running real.sh"
-mpirun -np $nocpu dplace -s1 $wrf_bin_dir/$real_exe  2>&1 | tee log.real
+# mpirun -np $nocpu dplace -s1 $wrf_bin_dir/$real_exe  2>&1 | tee log.real
+$wrf_bin_dir/$real_exe  2>&1 | tee log.real
 
 # real.sh ends here
