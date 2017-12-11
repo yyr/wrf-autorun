@@ -5,6 +5,11 @@
 # Description:
 # make a folder for named run
 
+# base_dir=/home/${user}/
+base_dir=/iitm2/cccr-res/yagnesh/
+
+set +x
+
 minargs=1
 
 user=$(whoami)
@@ -21,10 +26,10 @@ export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 export run_name=$1
 
 # template
-export wrf_build_dir=/home/${user}/wrf/gcc/WRFV3
-export data_dir_prefix=/home/${user}/DATA
+export wrf_build_dir=$base_dir/wrf/gcc/WRFV3
+export data_dir_prefix=$base_dir/wrf/data
 
-export run_dir_prefix=/home/${user}/wrf/run
+export run_dir_prefix=$base_dir/wrf/run
 export wrf_run_dir=$run_dir_prefix/$run_name
 
 cd $run_dir_prefix
