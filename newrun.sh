@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    File: prepare_run.sh
+#    File: newrun.sh
 
 # Description:
 # make a folder for named run

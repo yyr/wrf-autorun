@@ -1,7 +1,7 @@
 Dirty little scripts to automate a WRF model run.
 
 Expects ~dirnames.sh~ with definitions of environment variables in current
-working directory. see ~prepare_run.sh~
+working directory. see ~newrun.sh~
 
 I keep the following Structure. Some of the folders are created automatically
 by [[https://github.com/yyr/wrf_install][wrf_install]] package.
